@@ -7,10 +7,10 @@ session_start();
 
 require_once 'vendor/autoload.php';
 
-DB::$dbName = 'slimshop';
-DB::$user = 'slimshop';
+DB::$dbName = 'cp4809_dating';
+DB::$user = 'cp4809_dating';
 DB::$encoding = 'utf8';
-DB::$password = '4SfP6MG75CuNCECd';
+DB::$password = 'OHXS.~!Skx~,';
 
 
 // Slim creation and setup
@@ -35,6 +35,9 @@ if (!isset($_SESSION['user'])) {
     $_SESSION['user'] = array();
 }
 
-
+$app->get('/', function() use ($app) {
+    
+   echo "this is a dating website"; 
+});
 
 $app->run();
