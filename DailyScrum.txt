@@ -6,3 +6,8 @@ Date and Name
 3. Where do I need help from my teammate, teacher or internet?
 
 =================================================================================
+
+11/3/2017 Giorgio Plescia,
+1. Typed up description and url's for proposal, fixed database design.
+2. Start creation of login and registration pages for project.
+3. Discussion to split work evenly for a more efficient work flow.
