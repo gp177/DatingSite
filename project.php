@@ -98,15 +98,12 @@ $app->post('/register', function() use ($app) {
     $pass2 = $app->request()->post('pass2');
     $birthDate = $app->request()->post('birthDate');
     $gender = $app->request()->post('gender');
+    $postalCode = $app->request()->post('postalCode');
     $city = $app->request()->post('city');
     $country = $app->request()->post('country');
     
     
-   
-
-    $passEnc = password_hash($pass1, PASSWORD_BCRYPT);
-    $values = array('name' => $name, 'username'=> $username, 'email' => $email, 'password' => $passEnc, 
-        'birthDate' => $birthDate, 'gender' => $gender, 'city' => $city, 'country' => $country);
+  
     $errorList = array();
     //
     if (strlen($name) < 3 || strlen($name) > 60) {
@@ -151,60 +148,19 @@ $app->post('/register', function() use ($app) {
         }
     }
     
-    
-
-    // ======================================================= file upload validation
-    $userimage = array();
-    if ($_FILES['userimage']['error'] != UPLOAD_ERR_NO_FILE) {
-
-        $userimage = $_FILES['userimage'];
-        if ($userimage['error'] != 0) {
-            array_push($errorList, "Error uploading file");
-            $log->err("Error uploading file: " . print_r($userimage, true));
-        } else {
-            if (strstr($userimage['name'], '..')) {
-                array_push($errorList, "Invalid file name");
-                $log->warn("Uploaded file name with... in it (possible attack): " . print_r($userimage, true));
-            }
-
-
-            $info = getimagesize($userimage["tmp_name"]);
-            if ($info == FALSE) {
-                array_push($errorList, "File doesn't look like a valid Photo");
-            }
-            if ($_FILES["userimage"]["size"] > 200000) {
-                array_push($errorList, "Photo is too large");
-            } else {
-                if ($info['mime'] == 'image/jpeg' || $info['mime'] == 'image/gif' || $info['mime'] == 'image/png') {
-                    // image type is valid 
-                } else {
-                    array_push($errorList, "Photo must be a JPG, GIF or PNG");
-                }
-            }
-        }
-    } else { // no file uploaded
-      
+    if ($errorList) {
+        //3. failed submission
+        $app->render('addperson.html.twig', array('errorList' => $errorList, 'v' => $values));
     }
-    //
-    if ($errorList) { // 3. failed submission
-        $app->render('/register.html.twig', array(
-            'errorList' => $errorList,
-            'v' => $values));
-    } else { // 2. successful submission
-        if ($userimage) {
-            $sanitizedFileName = preg_replace('[^a-zA-Z0-9_\.-]', '_', $userimage['name']);
-            $photopath = 'uploads/' . $sanitizedFileName;
-            if (!move_uploaded_file($userimage['tmp_name'], $photopath)) {
-                $log->err("Error moving uploaded file: " . print_r($userimage, true));
-                $app->render('internal_error.html.twig');
-                return;
-            }
-
-            $values['photopath'] = "/" . $photopath;
-        }
-        DB::insert('users', $values);
-        $app->render('/register_success.html.twig');
+    else {
+        //4. Successful submission
+        $passEnc = password_hash($pass1, PASSWORD_BCRYPT);
+      DB::insert('users', array('name' => $name, 'username'=> $username, 'email' => $email, 'password' => $passEnc, 
+        'birthDate' => $birthDate, 'gender' => $gender, 'postalCode' => $postalCode, 'city' => $city, 'country' => $country));
+   $app->render('register_success.html.twig');
+   
     }
+     
 });
 
 
