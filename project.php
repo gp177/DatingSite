@@ -35,10 +35,42 @@ if (!isset($_SESSION['user'])) {
     $_SESSION['user'] = array();
 }
 
+
+// ============================================================= INDEX ================================================================
 $app->get('/', function() use ($app) {
     
    echo "this is a dating website"; 
 });
+// ============================================================= ADMINS TABLE ================================================================
+// 
+// ================================================== login
+$app->get('/admin/login', function() use ($app) {
+    $app->render('admin/login.html.twig');
+});
+
+$app->post('/admin/login',function() use ($app) {
+    $username = $app->request()->post('username');
+    $pass = $app->request()->post('pass');
+    $row = DB::queryFirstRow("SELECT * FROM admins WHERE username=%s", $username);
+    $error = false;
+    if (!$row) {
+        $error = true; // user not found
+    } else {
+        if (password_verify($pass, $row['password']) == FALSE) {
+            $error = true; // password invalid
+        }
+    }
+    if ($error) {
+        $app->render('admin/login.html.twig', array('error' => true));
+    } else {
+        unset($row['password']);
+        $_SESSION['user'] = $row;
+        $app->render('admin_panel.html.twig', array('userSession' => $_SESSION['user']));
+    }
+    
+});
+
+
 
 // ============================================================= USERS TABLE ================================================================
 
@@ -150,7 +182,7 @@ $app->post('/register', function() use ($app) {
     
     if ($errorList) {
         //3. failed submission
-        $app->render('addperson.html.twig', array('errorList' => $errorList, 'v' => $values));
+        $app->render('register.html.twig', array('errorList' => $errorList, 'v' => $values));
     }
     else {
         //4. Successful submission
