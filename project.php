@@ -70,13 +70,10 @@ $app->get('/', function() use ($app) {
 
 
 // ================================================== panel
-
-
-
-
-
-
-
+$app->get('/admin/panel', function() use ($app) {
+    $app->render('admin/admin_panel.html.twig');
+});
+    
 
 
 
