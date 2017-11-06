@@ -11,3 +11,8 @@ Date and Name
 1. Typed up description and url's for proposal, fixed database design.
 2. Start creation of login and registration pages for project.
 3. Discussion to split work evenly for a more efficient work flow.
+
+11/6/2017 Oleksii Redko
+1. Unfortunately, due to a number of personal and technical problems, I could not work on the project on the weekend
+2. Implement previous plans, such as profile page profile add /edit page, search for design
+3. Im not gonna present in class today
