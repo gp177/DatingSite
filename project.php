@@ -12,6 +12,27 @@ DB::$user = 'cp4809_dating';
 DB::$encoding = 'utf8';
 DB::$password = 'OHXS.~!Skx~,';
 
+// ======================================= ERROR handlers
+DB::$error_handler = 'sql_error_handler';
+DB::$nonsql_error_handler = 'nonsql_error_handler';
+
+function sql_error_handler($params) {
+    global $app, $log;
+    $log->err("SQL ERROR: " . $params['error']);
+    $log->err("in query: " . $params['query']);
+    http_response_code(500);
+    $app->render('error_internal.html.twig');
+    die;
+}
+
+function nonsql_error_handler($params) {
+    global $app, $log;
+    $log->err("SQL ERROR: " . $params['error']);
+    http_response_code(500);
+    $app->render('error_internal.html.twig');
+    die;
+}
+
 
 // Slim creation and setup
 $app = new \Slim\Slim(array(
@@ -135,7 +156,10 @@ $app->post('/register', function() use ($app) {
     $country = $app->request()->post('country');
     
     
-  
+   $passEnc = password_hash($pass1, PASSWORD_BCRYPT);
+     $values = array('name' => $name, 'username'=> $username, 'email' => $email, 'password' => $passEnc, 
+        'birthDate' => $birthDate, 'gender' => $gender, 'postalCode' => $postalCode, 'city' => $city, 'country' => $country);
+     
     $errorList = array();
     //
     if (strlen($name) < 3 || strlen($name) > 60) {
@@ -182,13 +206,12 @@ $app->post('/register', function() use ($app) {
     
     if ($errorList) {
         //3. failed submission
-        $app->render('register.html.twig', array('errorList' => $errorList, 'v' => $values));
+        $app->render('/register.html.twig', array('errorList' => $errorList, 'v' => $values));
     }
     else {
         //4. Successful submission
-        $passEnc = password_hash($pass1, PASSWORD_BCRYPT);
-      DB::insert('users', array('name' => $name, 'username'=> $username, 'email' => $email, 'password' => $passEnc, 
-        'birthDate' => $birthDate, 'gender' => $gender, 'postalCode' => $postalCode, 'city' => $city, 'country' => $country));
+       
+      DB::insert('users', $values);
    $app->render('register_success.html.twig');
    
     }
