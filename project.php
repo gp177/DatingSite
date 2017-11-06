@@ -60,7 +60,9 @@ if (!isset($_SESSION['user'])) {
 // ============================================================= INDEX ================================================================
 $app->get('/', function() use ($app) {
     
-   echo "this is a dating website"; 
+  
+   
+   $app->render('/index.html.twig');
 });
 // ============================================================= ADMINS TABLE ================================================================
 // 
@@ -128,12 +130,24 @@ $app->post('/login',function() use ($app) {
     } else {
         unset($row['password']);
         $_SESSION['user'] = $row;
-        $app->render('login_success.html.twig', array('userSession' => $_SESSION['user']));
+        $app->render('/login_success.html.twig', array('userSession' => $_SESSION['user']));
     }
     
 });
 
+// ================================================= check if email is taken
+$app->get('/isemailregistered/:email', function($email) use ($app) {
 
+    $row = DB::queryFirstRow("SELECT * FROM users WHERE email=%s", $email);
+    echo!$row ? "" : '<span style="font-size: 16px; background-color: lightblue; color: red; font-weight: bold;">Email already Registered<?span>';
+});
+
+// ================================================= check if username is taken
+$app->get('/isusernameregistered/:username', function($username) use ($app) {
+
+    $row = DB::queryFirstRow("SELECT * FROM users WHERE username=%s", $username);
+    echo!$row ? "" : '<span style="font-size: 16px; background-color: lightblue; color: red; font-weight: bold;">Username already Taken<?span>';
+});
 
 
 // ================================================== register
@@ -203,6 +217,9 @@ $app->post('/register', function() use ($app) {
                     . "uppercase letter, lowercase letter, digit or special character");
         }
     }
+    
+    
+    
     
     if ($errorList) {
         //3. failed submission

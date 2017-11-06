@@ -1,6 +1,49 @@
-<form method="post">
+{% extends "master.html.twig" %}
+
+
+
+
+{% block headextra %}
+ <script>
+            $(document).ready(function () {
+
+                $('input[name=email]').bind("propertychange change click keyup input paste", function () {
+
+                    var email = $('input[name=email]').val();
+                    $('#isTaken').load('/isemailregistered/' + email);
+                });
+
+            });
+            
+             $(document).ready(function () {
+
+                $('input[name=username]').bind("propertychange change click keyup input paste", function () {
+
+                    var username = $('input[name=username]').val();
+                    $('#UisTaken').load('/isusernameregistered/' + username);
+                });
+
+            });
+            
+
+        </script>
+  {% endblock %}
+
+  
+   {% block content %}
+            {% if errorList %}
+                <ul>
+                    {% for error in errorList %}
+                        <li>{{error}}</li>
+                        {% endfor %}
+                </ul>
+            {% endif %}
+
+
+
+<form method="post" enctype="multipart/form-data">
     Name: <input type="text" name="name" value="{{v.name}}"><br>
-    Username: <input type="text" name="username" value="{{v.username}}"><br>
+    Username: <input type="text" name="username" value="{{v.username}}"> <span id="UisTaken"></span><br>
     Email: <input type="email" name="email" value="{{v.email}}"><span id="isTaken"></span><br>
     Password: <input type="password" name="pass1"><br>
     Password(repeat): <input type="password" name="pass2"><br>
@@ -16,3 +59,4 @@
     Profile Picture:  <input type="file" name="photopath"><br><br>
     <input type="submit" value="Register">
 </form>
+       {% endblock %}
