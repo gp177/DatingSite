@@ -11,3 +11,13 @@ Date and Name
 1. Typed up description and url's for proposal, fixed database design.
 2. Start creation of login and registration pages for project.
 3. Discussion to split work evenly for a more efficient work flow.
+
+11/4-5/2017 Giorgio Plescia,
+1. Created Registration pages and login/logout, simply stylized twig for use, started on admins.
+2. Complete admin registration/login and work on panel options.
+3. figure out a way to implement admin rank.
+
+11/6/2017 Giorgio Plescia,
+1. fixed registration validation, added twig templates and worked on admin progress.
+2. fix admin login and complete admin panel.
+3. See status on tickets or chat to attempt a test.
