@@ -1,0 +1,54 @@
+{% extends "master.html.twig" %}
+
+{% block title %}Posts{% endblock %}
+
+{% block content %}
+   
+    
+    <table border="1">
+        <tr>
+            <th>#</th>
+            <th>username</th>
+            <th>email</th>
+            <th>name</th>
+            <th>gender</th>
+            <th>Birth Date</th>
+            <th>Postal Code</th>
+             <th>City</th>
+             <th>Country</th>
+             <th>Registration Date</th>
+        </tr>
+    
+    {% for p in list %}
+        <tr>
+       
+       <td>{{p.id}}</td>
+            <td>{{p.username}}</td>
+            <td>{{p.email}}</td>
+            <td>{{p.name}}</td>
+             <td>{{p.gender}}</td>
+              <td>{{p.birthDate}}</td>
+               <td>{{p.postalCode}}</td>
+                <td>{{p.city}}</td>
+                 <td>{{p.country}}</td>
+                  <td>{{p.registrationDate}}</td>
+          
+        </tr>
+        
+      
+            {% else %}
+            <tr><td colspan="6">There are no users</td></tr>
+                
+                {% endfor %}
+    
+    
+    <br><br>
+                <form method="get">            
+        <input type="text" name="search" value="{{v.name}}">
+        <input type="submit" value="Search"><br><br>
+                     </form>
+        
+ 
+    
+    
+{% endblock %}

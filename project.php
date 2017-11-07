@@ -66,7 +66,15 @@ $app->get('/', function() use ($app) {
 });
 // ============================================================= ADMINS TABLE ================================================================
 
+// ================================================== users list
 
+$app->get('/admin/panel/users', function() use ($app) {
+
+   
+
+    $productList = DB::query("SELECT * FROM users");
+    $app->render('/admin/admin_users.html.twig', array('list' => $productList));
+});
 
 
 // ================================================== panel
