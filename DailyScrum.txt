@@ -7,10 +7,18 @@ Date and Name
 
 =================================================================================
 
+03.11.2017 Oleksii Redko
+
+1.I've done 3  mockups for proposal
+2.Will work on design of or site , prepere basic templetes for work, start wosking on databese connections and forms
+3. nothing for now
+=======
 11/3/2017 Giorgio Plescia,
 1. Typed up description and url's for proposal, fixed database design.
 2. Start creation of login and registration pages for project.
 3. Discussion to split work evenly for a more efficient work flow.
+
+=======
 =======
 
 11/4-5/2017 Giorgio Plescia,
@@ -35,8 +43,9 @@ Date and Name
 2. Old plans still in progress, such as profile page profile add /edit page, search for design
 3. Discauss wit team mate design questions and main page first page content  
 
-=======
+
 11/7/2017 Giorgio Plescia,
 1. fixed admin login, added registration for admins and linked users with admin panel option.
 2. fix user profile image connection, and link with profile page.
 3. ask partner to attach pages, and if to re structure php files
+
