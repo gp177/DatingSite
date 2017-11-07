@@ -1,9 +1,7 @@
 {% extends "master.html.twig" %}
 
 
-{% block headextra %}
-
-  {% endblock %}
+{% block headextra %}   {% endblock %}
 
   
    {% block content %}
@@ -14,7 +12,7 @@
                         {% endfor %}
                 </ul>
             {% endif %}
-
-         <p>Profile</p>   
-            
+      
+       <img src="{{pl.profPicId}}" alt="profile picture"/>
+       <p><span>User Name:</span><span>{{pl.name}}</span></p>
        {% endblock %}{# empty Twig template #}
