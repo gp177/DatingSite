@@ -7,6 +7,7 @@ session_start();
 
 require_once 'vendor/autoload.php';
 
+
 DB::$dbName = 'cp4809_dating';
 DB::$user = 'cp4809_dating';
 DB::$encoding = 'utf8';
@@ -336,5 +337,5 @@ $app->post('/register', function() use ($app) {
      
 });
 
-
+require_once 'profile.php';
 $app->run();
