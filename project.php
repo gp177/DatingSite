@@ -150,12 +150,12 @@ $app->map('/passreset/token/:secretToken', function($secretToken) use ($app, $lo
     
      if ($errorList) {
         //3. failed submission
-        $app->render('passreset_form.html.twig', array('errorList' => $errorList, 'v' => $values));
+        $app->render('passreset_form.html.twig', array('errorList' => $errorList));
     }
     else {
         //4. Successful submission
-       
-      DB::update('users', array('password' => $pass1), 'id=%d', $user['id']);
+        $passEnc = password_hash($pass1, PASSWORD_BCRYPT);
+      DB::update('users', array('password' => $passEnc), 'id=%d', $user['id']);
    $app->render('passreset_form_success.html.twig');
    
     }
