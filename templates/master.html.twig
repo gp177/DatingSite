@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href='/styles.css'>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
+        <meta charset="UTF-8">
+        <title>{% block title %}Default{% endblock %}</title>
+       {% block headextra %} {% endblock %}
+    </head>
+    <body>
+        <div id="centeredContent">
+            
+            {% if userSession %}
+                
+              
+                <p><img src="{{userSession.photopath}}" width="20" height="20"> {{ userSession.name }},
+                    You may <a href='/logout'>Logout</a></p>
+                
+              {% else %}
+                  <p>You're not logged in. You may <a href='/register'>Register</a>
+                      or <a href='/login'>Login</a>.</p>
+                  {% endif %}
+            
+            
+               {% block content %} {% endblock %}
+               
+        </div>
+    </body>
+</html>
