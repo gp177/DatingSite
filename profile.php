@@ -12,7 +12,7 @@ $app->get('/profile', function() use ($app) {
         return;
     }
    $profileList = array();
-   $profileList = DB::query('SELECT * FROM users WHERE Id=%i', $_SESSION['user']['id']);
+   $profileList = DB::query('SELECT * FROM users WHERE id=%i', $_SESSION['user']['id']);
     if (!$profileList) {
         
        
