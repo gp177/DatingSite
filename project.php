@@ -92,9 +92,9 @@ $app->map('/password/request', function() use ($app, $log) {
         $headers = "MIME-Version: 1.0\r\n";
         $headers .= "Content-type: text/html\r\n";
         $headers .= "From: Noreply <noreply@ipd10.com>\r\n";
-        $headers .= sprintf("To: %s <%s>\r\n", htmlentities($user['name']), $user['email']);
+        $toEmail .= sprintf("%s <%s>\r\n", htmlentities($user['name']), $user['email']);
         
-        mail($email, "Your pasword reset for " . $_SERVER['SERVER_NAME'], $emailBody, $headers);
+        mail($toEmail, "Your pasword reset for " . $_SERVER['SERVER_NAME'], $emailBody, $headers);
         
         $app->render('passreset_request_success.html.twig');
  
@@ -104,6 +104,71 @@ $app->map('/password/request', function() use ($app, $log) {
     }
     
 })->via('GET', 'POST');
+
+
+$app->map('/passreset/token/:secretToken', function($secretToken) use ($app, $log) {
+    
+    $row = DB::queryFirstRow('SELECT * FROM passresets WHERE secretToken=%s', $secretToken);
+    
+    if (!$row) {
+        $app->render('passreset_notfound_expired.html.twig');
+        return;
+    }
+    if (strtotime($row['expiryDateTime']) < time()) {
+        // row found but expired
+        $app->render('passreset_notfound_expired.html.twig');
+        return;
+    }
+    //
+    $user = DB::queryFirstRow("SELECT * FROM users WHERE id=%d", $row['userId']);
+    if (!$user) {
+        $log->err(sprintf("Passreset for token %s user id=%d not found", $row['secretToken'], $row['userId']));
+        $app->render('error_internal.html.twig');
+        return;
+    }
+    
+    if ($app->request()->isGet()) {
+        $app->render('passreset_form.html.twig', array('name' => $user['name'], 'email' => $user['email']));
+    }
+    else {
+        
+         // password validation
+    if ($pass1 != $pass2) {
+        array_push($errorList, "Passwords don't match");
+    } else {
+        if (strlen($pass1) < 2 || strlen($pass1) > 100) {
+            array_push($errorList, "Password must be between 2 and 100 characters ");
+        }
+        if (!preg_match('/[A-Z]/', $pass1) || !preg_match('/[a-z]/', $pass1) || !preg_match('/[0-9' . preg_quote("!@#\$%^&*()_-+={}[],.<>;:'\"~`") . ']/', $pass1)) {
+            array_push($errorList, "Password must include at least one of each: "
+                    . "uppercase letter, lowercase letter, digit or special character");
+        }
+    }
+    
+     if ($errorList) {
+        //3. failed submission
+        $app->render('passreset_form.html.twig', array('errorList' => $errorList, 'v' => $values));
+    }
+    else {
+        //4. Successful submission
+         $pass1 = $app->request()->post('pass1');
+         $pass2 = $app->request()->post('pass2');
+       
+      DB::update('users', array('password' => $pass1), 'id=%d', $user['id']);
+   $app->render('passreset_form_success.html.twig');
+   
+    }
+        
+       
+    }
+    
+})->via('GET', 'POST');
+
+
+
+
+
+
 
 
 // ============================================================= INDEX ================================================================
