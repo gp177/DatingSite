@@ -12,7 +12,12 @@ $app->get('/profile', function() use ($app, $log) {
         return;
     }
 
+
    $profileList = DB::queryFirstRow('SELECT * FROM users WHERE id=%i', $_SESSION['user']['id']);
+
+   $profileList = array();
+   $profileList = DB::query('SELECT * FROM users WHERE id=%i', $_SESSION['user']['id']);
+
     if (!$profileList) {
         print_r($profileList); 
 //      $app->render('not_found.html.twig');
