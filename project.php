@@ -131,7 +131,10 @@ $app->map('/passreset/token/:secretToken', function($secretToken) use ($app, $lo
         $app->render('passreset_form.html.twig', array('name' => $user['name'], 'email' => $user['email']));
     }
     else {
+         $pass1 = $app->request()->post('pass1');
+         $pass2 = $app->request()->post('pass2');
         
+         $errorList = array();
          // password validation
     if ($pass1 != $pass2) {
         array_push($errorList, "Passwords don't match");
@@ -151,8 +154,6 @@ $app->map('/passreset/token/:secretToken', function($secretToken) use ($app, $lo
     }
     else {
         //4. Successful submission
-         $pass1 = $app->request()->post('pass1');
-         $pass2 = $app->request()->post('pass2');
        
       DB::update('users', array('password' => $pass1), 'id=%d', $user['id']);
    $app->render('passreset_form_success.html.twig');
