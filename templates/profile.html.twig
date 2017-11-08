@@ -1,7 +1,7 @@
 {% extends "master.html.twig" %}
 
 
-{% block headextra %}Profile{% endblock %}
+{% block title %}{% endblock %}
 
   
    {% block content %}
@@ -13,12 +13,19 @@
                 </ul>
             {% endif %}
       
-           
-       <img style="width:200px; height: 200px;" src="{{pl.profPicId}}" alt="profile picture" />
+       <form>    
+       <img style="width:200px; height: 200px;" name="profileImage" src="{{pl.profilePicPath}}" alt="profile picture" />
+       <button type="button" name="edit" onclick="location.href='/editprofile';">Edit Profile</button>
        <p><span>Name:</span><span>{{pl.name}}</span></p>
        <p><span>Birth Date:</span><span>{{pl.birthDate}}</span></p>
+          <p><span>Gender:</span><span>{{pl.gender}}</span></p>
        <p><span>Country:</span><span>{{pl.country}}</span></p>
        <p><span>City:</span><span>{{pl.city}}</span></p>
+       <hr>
+       
+       
        <p><span>Language:</span><span>{{pl.language}}</span></p>
        <p><span>Additional Info:</span><span>{{pl.additionalInfo}}</span></p>
+       
+       </form>
        {% endblock %}{# empty Twig template #}
