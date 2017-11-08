@@ -8,7 +8,17 @@ if (false) {
 // ================================================== users list
 
 $app->get('/admin/panel/users', function() use ($app) {
+    
+        
+    $adminvalid = DB::query('SELECT * FROM admins WHERE id=%i', $_SESSION['user']['id']);
+    
+    if (!$adminvalid) {
+         $app->render('access_denied.html.twig');
+        return;
+    }
 
+        
+  
     $userCount = DB::query('SELECT id FROM users');
     
     $productList = DB::query("SELECT * FROM users");
@@ -18,6 +28,14 @@ $app->get('/admin/panel/users', function() use ($app) {
 
 // ================================================== panel
 $app->get('/admin/panel', function() use ($app) {
+    
+     $adminvalid = DB::query('SELECT * FROM admins WHERE id=%i', $_SESSION['user']['id']);
+    
+    if (!$adminvalid) {
+         $app->render('access_denied.html.twig');
+        return;
+    }
+    
     $app->render('admin/admin_panel.html.twig');
 });
 
@@ -25,6 +43,13 @@ $app->get('/admin/panel', function() use ($app) {
 // ======================================= remove user
 
 $app->get('/admin/panel/delete/:id', function($id) use ($app) {
+    
+     $adminvalid = DB::query('SELECT * FROM admins WHERE id=%i', $_SESSION['user']['id']);
+    
+    if (!$adminvalid) {
+         $app->render('access_denied.html.twig');
+        return;
+    }
    
     $usersel = DB::queryFirstRow('SELECT * FROM users WHERE id=%i', $id);
     if (!$usersel) {

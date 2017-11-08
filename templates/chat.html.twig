@@ -1,0 +1,10 @@
+{% extends "master.html.twig" %}
+
+{% block title %}Chats{% endblock %}
+
+{% block content %}
+    <form method="post" enctype="multipart/form-data">
+        <textarea rows="4" cols="50" placeholer="enter message"> </textarea><br>
+         <input type="submit" value="Send">
+    </form>
+{% endblock %}
