@@ -49,3 +49,7 @@ Date and Name
 2. fix user profile image connection, and link with profile page.
 3. ask partner to attach pages, and if to re structure php files
 
+11/08/2017
+1. worked on design of profile page, couldn't finish profile page again
+2. complete profile, design will keep for later
+3. error 500, site suddenly stopped working

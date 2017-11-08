@@ -21,4 +21,11 @@ https://code.tutsplus.com/tutorials/how-to-create-a-simple-web-based-chat-applic
 
 
 
+design:
+https://bootsnipp.com/snippets/40P1m
 
+https://bootsnipp.com/snippets/mM3eR
+
+https://bootsnipp.com/snippets/5Mr7X
+
+https://bootsnipp.com/snippets/BE8Rp

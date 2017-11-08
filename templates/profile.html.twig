@@ -14,7 +14,11 @@
             {% endif %}
       
            
-       <img src="{{pl.profPicId}}" alt="profile picture"/>
-       <p><span>User Name:</span><span>{{pl.name}}</span></p>
-       
+       <img style="width:200px; height: 200px;" src="{{pl.profPicId}}" alt="profile picture" />
+       <p><span>Name:</span><span>{{pl.name}}</span></p>
+       <p><span>Birth Date:</span><span>{{pl.birthDate}}</span></p>
+       <p><span>Country:</span><span>{{pl.country}}</span></p>
+       <p><span>City:</span><span>{{pl.city}}</span></p>
+       <p><span>Language:</span><span>{{pl.language}}</span></p>
+       <p><span>Additional Info:</span><span>{{pl.additionalInfo}}</span></p>
        {% endblock %}{# empty Twig template #}
