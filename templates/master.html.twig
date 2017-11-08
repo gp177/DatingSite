@@ -13,7 +13,7 @@
     <body>
           <nav class="navbar navbar-expand-md bg-primary navbar-dark">
     <div class="container">
-      <a class="navbar-brand" href="#"><i class="fa d-inline fa-lg fa-cloud"></i><b>Slim ToDo</b></a>
+      <a class="navbar-brand" href="#"><i class="fa d-inline fa-lg fa-cloud"></i><b>Dating Website</b></a>
       
       {% if userSession %}
           
@@ -53,16 +53,7 @@
   </nav>
         <div id="centeredContent">
             
-            {% if userSession %}
-                
-              
-                <p><img src="{{userSession.photopath}}" width="20" height="20"> {{ userSession.name }},
-                    You may <a href='/logout'>Logout</a></p>
-                
-              {% else %}
-                  <p>You're not logged in. You may <a href='/register'>Register</a>
-                      or <a href='/login'>Login</a>.</p>
-                  {% endif %}
+        
             
             
                {% block content %} {% endblock %}

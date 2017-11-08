@@ -4,10 +4,13 @@
 
 {% block content %}
    
+    <h2>Total Users: {{userCount}}</h2>
+    
     
     <table border="1">
         <tr>
             <th>#</th>
+            <th>Photo</th>
             <th>username</th>
             <th>email</th>
             <th>name</th>
@@ -17,12 +20,13 @@
              <th>City</th>
              <th>Country</th>
              <th>Registration Date</th>
+             <th>Actions</th>
         </tr>
     
     {% for p in list %}
         <tr>
-       
-       <td>{{p.id}}</td>
+      <td>{{p.id}}</td>
+      <td><img src=""></td>
             <td>{{p.username}}</td>
             <td>{{p.email}}</td>
             <td>{{p.name}}</td>
@@ -32,7 +36,12 @@
                 <td>{{p.city}}</td>
                  <td>{{p.country}}</td>
                   <td>{{p.registrationDate}}</td>
-          
+                  <td>
+                 <a href="/admin/panel/warn/{{p.id}}">Warn</a> |
+                <a href="/admin/panel/ban/{{p.id}}">Ban</a> |
+                <a href="/admin/panel/delete/{{p.id}}">Remove</a>
+                  </td>
+                    
         </tr>
         
       

@@ -1,0 +1,25 @@
+{% extends "master.html.twig" %}
+
+{% block title %}User Deletion{% endblock %}
+
+
+{% block content %}
+    
+    <p><b>Are you sure you want to Remove this User?</b></p>
+    <form action="/admin/panel/users" style="display: inline;">
+        <input type="submit" value="Cancel">
+    </form>
+    
+    <form method="post" style="display: inline;">
+        <input type="hidden" name="confirmed" value="true">
+        <input type="submit" value="Delete">
+    </form>
+        
+        <div>
+             <p>Id: {{p.id}}</p>
+            <p>Username: {{p.username}}</p>
+            <p>Email: {{p.email}}</p>
+           
+        </div>
+    
+{% endblock %}

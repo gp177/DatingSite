@@ -89,7 +89,32 @@ $app->post('/register', function() use ($app) {
     }
     
     
+    // age validation
+    $age = 18;
+ 
+    if(is_string($birthDate)) {
+        $birthDate = strtotime($birthDate);
+    }
+    if(time() - $birthDate < $age * 31536000)  {
+         array_push($errorList, "You must be 18 or older to register ");
+    }
     
+    if ($country == 'Canada') {
+        
+        if(!preg_match("/^([a-ceghj-npr-tv-z]){1}[0-9]{1}[a-ceghj-npr-tv-z]{1}[0-9]{1}[a-ceghj-npr-tv-z]{1}[0-9]{1}$/i",$postalCode)) {
+            
+                     array_push($errorList, "Invalid Canadian Postal Code, Format: H1H1H1 ");
+        }
+            
+    }
+    else {
+            if ($country == 'USA') {
+               if (!preg_match("/^([0-9]{5})(-[0-9]{4})?$/i", $postalCode)){ 
+                   array_push($errorList, "Invalid American Zip Code, Format: 12345");
+               } 
+    }
+    }
+
     
     if ($errorList) {
         //3. failed submission

@@ -53,7 +53,10 @@
     </select><br>
     Postal Code: <input type="text" name="postalCode" value="{{v.postalCode}}"><br>
     City: <input type="text" name="city" value="{{v.city}}"><br>
-    Country: <input type="text" name="country" value="{{v.country}}"><br>
+    Country:<select name="country" value="{{v.country}}">
+        <option value="Canada">Canada</option>
+        <option value="USA">USA</option>
+    </select><br>
     <input type="submit" value="Register">
 </form>
        {% endblock %}
