@@ -53,3 +53,9 @@ Date and Name
 1. worked on design of profile page, couldn't finish profile page again
 2. complete profile, design will keep for later
 3. error 500, site suddenly stopped working
+
+
+11/8/2017 Giorgio Plescia,
+1. Seperated php files, added functionality to admin user page, added more twigs
+2. finish warn and ban user for admins, add to panel.
+3. Help on site design
