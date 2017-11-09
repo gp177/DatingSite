@@ -37,7 +37,9 @@ $app->post('/login',function() use ($app) {
     } else {
         unset($row['password']);
         $_SESSION['user'] = $row;
-        $app->render('/login_success.html.twig', array('userSession' => $_SESSION['user']));
+        $app->render('index.html.twig', array('userSession' => $_SESSION['user']));
+        header("Refresh:0; url=/");
+        
     }
     
 });

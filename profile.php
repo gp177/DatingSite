@@ -114,7 +114,7 @@ $app->post('/editprofile', function() use ($app, $log) {
         $imagePath = 'profileimages/' . $sanitizedFileName;
         if (!move_uploaded_file($profileImage['tmp_name'], $imagePath)) {
             $log->err("Error moving uploaded file: " . print_r($profileImage, true));
-            $app->render('internal_error.html.twig');
+            $app->render('error_internal.html.twig');
             return;
         }
         // TODO: if EDITING and new file is uploaded we should delete the old one in uploads
@@ -125,3 +125,28 @@ $app->post('/editprofile', function() use ($app, $log) {
     DB::update('users', array($values), 'id=%i', $_SESSION['user']['id']);
     $app->render('/profile_edit_success.html.twig');
 });
+
+
+// ============================================================== USER SELECTION ==========================================================
+
+$app->get('/profile/:id', function($id) use ($app) {
+            if (!$_SESSION['user']) {
+                $app->render('access_denied.html.twig');
+                return;
+            }
+
+            //
+            if ($id != -1) {
+                
+                $profile = DB::query('SELECT * FROM users WHERE users.id=%i', $id);
+                if (!$profile) {
+                    echo "User Not Found";
+                    return;
+                }
+            } else {
+                $profile = array();
+            }
+            $app->render('user.html.twig', array('list' => $profile));
+        })
+        ->conditions(array( 'id' => '\d+'  ));
+

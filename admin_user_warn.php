@@ -5,29 +5,31 @@ if (false) {
     $log = new Logger('main');
 }
 
-$app->map('/admin/panel/warn/', function() use ($app, $log) {
-    
+$app->map('/admin/panel/warn/:id', function($id) use ($app, $log) {
+    $user = DB::queryFirstRow("SELECT * FROM users WHERE id=%s", $id);
+       
     if ($app->request()->isGet()) {
-        $app->render('user_warn.html.twig');
+        $app->render('admin/user_warn.html.twig', array('p' => $user));
         return;
     }
     // in post - receiving submission
-    $email = $app->request()->post('email');
-    $user = DB::queryFirstRow("SELECT * FROM users WHERE email=%s", $email);
+    $reason = $app->request()->post('reason');
+ 
     if ($user) {
         
      
         
-        $emailBody = $app->view()->render('passreset_email.html.twig', array('name' => $user['name']));
+        $emailBody = $app->view()->render('admin/user_warn_email.html.twig', array('user' => $user, 'reason'=>$reason ));
         
         $headers = "MIME-Version: 1.0\r\n";
         $headers .= "Content-type: text/html\r\n";
         $headers .= "From: Noreply <noreply@ipd10.com>\r\n";
         $toEmail .= sprintf("%s <%s>\r\n", htmlentities($user['name']), $user['email']);
         
-        mail($toEmail, "Your pasword reset for " . $_SERVER['SERVER_NAME'], $emailBody, $headers);
+        mail($toEmail, "User Warning Message " . $_SERVER['SERVER_NAME'], $emailBody, $headers);
         
-        $app->render('passreset_request_success.html.twig');
+        echo "Warning Sent";
+        
  
     }
     else { // failed request

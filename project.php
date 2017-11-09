@@ -63,14 +63,28 @@ if (!isset($_SESSION['user'])) {
 // ============================================================= INDEX ================================================================
 $app->get('/', function() use ($app) {
   
-   $app->render('/index.html.twig');
+    
+    
+     
+    
+    
+   $productList = DB::query('SELECT *, YEAR(CURRENT_TIMESTAMP) - YEAR(birthDate) - (RIGHT(CURRENT_TIMESTAMP, 5) < RIGHT(birthDate, 5)) as age FROM users');
+    
+  
+    
+    $age = date_diff(date_create($productList['birthDate']), date_create('now'))->y;
+    
+    
+    
+   $app->render('/index.html.twig', array('list' => $productList, 'age' => $age));
 });
 
 
 
 
-require_once 'admin_user_warn.php';
+
 // ============================================================= PASSWORD REQUEST ================================================================
+require_once 'admin_user_warn.php';
 
 require_once 'password_request.php';
 

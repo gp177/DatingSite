@@ -1,0 +1,12 @@
+$ext = based on MIME type, detected by imagesize()
+$filename = date("Y-m-d") . "_" md5(time()) . "." . $ext;
+
+example result:
+
+2017-11-02_a987asdf234nsadf87haasfda3.jpg
+
+uploads/2017-11-02_a987asdf234nsadf87haasfda3.jpg
+
+
+
+

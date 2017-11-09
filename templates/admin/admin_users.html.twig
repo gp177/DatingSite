@@ -7,7 +7,7 @@
     <h2>Total Users: {{userCount}}</h2>
     
     
-    <table border="1">
+    <table>
         <tr>
             <th>#</th>
             <th>Photo</th>
@@ -26,7 +26,7 @@
     {% for p in list %}
         <tr>
       <td>{{p.id}}</td>
-      <td><img src=""></td>
+      <td><img src="{{p.profilePicPath}}" width="50" height="50"></td>
             <td>{{p.username}}</td>
             <td>{{p.email}}</td>
             <td>{{p.name}}</td>
@@ -49,7 +49,7 @@
             <tr><td colspan="6">There are no users</td></tr>
                 
                 {% endfor %}
-    
+    </table>
     
     <br><br>
                 <form method="get">            

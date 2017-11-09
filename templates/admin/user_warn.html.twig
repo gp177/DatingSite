@@ -1,0 +1,29 @@
+{% extends "master.html.twig" %}
+
+
+{% block title %}Warn User{% endblock %}
+
+{% block content %}
+
+    <p>Enter warning message for the user</p>
+    
+    {% if error %}
+        
+        <p>Message Invalid</p>  
+        {% endif %}
+        
+        <div>
+            <h4>User Selected:</h4><br>
+            <p>Id: {{p.id}}</p>
+            <p>Username: {{p.username}}</p>
+            <p>Email: {{p.email}}</p>
+           
+        </div><br>
+            
+
+<form  method="post">
+    Reason <textarea rows="4" cols="50" name="reason" placeholder="Enter message"></textarea><br>
+    <input type="submit" value="Request">
+</form>
+
+{% endblock %}
