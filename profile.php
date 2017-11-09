@@ -33,17 +33,16 @@ $app->get('/editprofile', function() use ($app, $log) {
     if (!$_SESSION['user']) {
         $app->render('access_denied.html.twig');
         return;
-    } else{
+    } else {
         $profileList = DB::queryFirstRow('SELECT * FROM users WHERE id=%i', $_SESSION['user']['id']);
 
-    if (!$profileList) {
-        print_r($profileList);
-        $app->render('not_found.html.twig');
-        return;
-    } else {
-        $app->render('editprofile.html.twig', array('pl' => $profileList));
-    }
-    
+        if (!$profileList) {
+//        print_r($profileList);
+            $app->render('not_found.html.twig');
+            return;
+        } else {
+            $app->render('profile_edit.html.twig', array('pl' => $profileList));
+        }
     }
 });
 
@@ -56,8 +55,31 @@ $app->post('/editprofile', function() use ($app, $log) {
         return;
     }
     
+    $name = $app->request()->post('name');
+    $gender = $app->request()->post('gender');
+    $country = $app->request()->post('country');
+    $city = $app->request()->post('city');
+    $postalCode = $app->request()->post('postalCode');
+    $language = $app->request()->post('language');
+    $additionalInfo = $app->request()->post('additionalInfo');
+    $height = $app->request()->post('height');
+    $weight = $app->request()->post('weight');
+    $hairColour= $app->request()->post('hairColour');
+    $bodyType = $app->request()->post('bodyType');
+    $skinColour = $app->request()->post('skinColour');
+    $occupation = $app->request()->post('occupation');
+    $sexualOrientation = $app->request()->post('sexualOrientation');
+    
+
+    $values = array('name' => $name, 'gender' => $gender, 'country' => $country, 
+        'city' => $city,'postalCode'=>$postalCode,'language'=>$language,'additionalInfo'=>$additionalInfo,
+        'height'=>$height,'weight'=>$weight,'hairColour'=>$hairColour,'bodyType'=>$bodyType,
+        'skinColour'=>$skinColour,'occupation'=>$occupation,'sexualOrientation'=>$sexualOrientation);
+    $errorList = array();
+    
     //upload checking 
-    $profileImage = array();
+    //FIXME: attached pictures not necessary
+       $profileImage = array();
     if (isset($_FILES['profileImage'])) {
         $profileImage = $_FILES['profileImage'];
         if ($profileImage['error'] != 0) {
@@ -87,20 +109,19 @@ $app->post('/editprofile', function() use ($app, $log) {
     }
     //===============================================================================
     //transfer file
-        if ($profileImage) {
-            $sanitizedFileName = preg_replace('[^a-zA-Z0-9_\.-]', '_', $profileImage['name']);
-            $imagePath = 'profileimages/' . $sanitizedFileName;
-            if (!move_uploaded_file($profileImage['tmp_name'], $imagePath)) {
-                $log->err("Error moving uploaded file: " . print_r($profileImage, true));
-                $app->render('internal_error.html.twig');
-                return;
-            }
-            // TODO: if EDITING and new file is uploaded we should delete the old one in uploads
-            $values['imagePath'] = "/" . $imagePath;
+    if ($profileImage) {
+        $sanitizedFileName = preg_replace('[^a-zA-Z0-9_\.-]', '_', $profileImage['name']);
+        $imagePath = 'profileimages/' . $sanitizedFileName;
+        if (!move_uploaded_file($profileImage['tmp_name'], $imagePath)) {
+            $log->err("Error moving uploaded file: " . print_r($profileImage, true));
+            $app->render('internal_error.html.twig');
+            return;
         }
-        //end transfer file=====================================
+        // TODO: if EDITING and new file is uploaded we should delete the old one in uploads
+        $values['profilePicPath'] = "/" . $imagePath;
+    }
+    //end transfer file=====================================
 //        print_r($profileImage);
-        DB::update('users', array('profilePicPath'=>$imagePath),'id=%i', $_SESSION['user']['id']);
-        $app->render('/todos_add_success.html.twig');
-    
+    DB::update('users', array($values), 'id=%i', $_SESSION['user']['id']);
+    $app->render('/profile_edit_success.html.twig');
 });

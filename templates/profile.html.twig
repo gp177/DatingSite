@@ -3,29 +3,106 @@
 
 {% block title %}{% endblock %}
 
+
+{% block content %}
+    {% if errorList %}
+        <ul>
+            {% for error in errorList %}
+                <li>{{error}}</li>
+                {% endfor %}
+        </ul>
+    {% endif %}
+
+    <div class="py-5">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-md-12 align-self-center"></div>
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <img class="img-fluid d-block mb-4 w-100 img-thumbnail" src="{{pl.profilePicPath}}"> </div>
+                <div class="col-md-7">
+                    <table class="table table-striped">
+                        <thead>
+                        <h2 class="text-primary pt-3">{{pl.name}}</h2>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Date of Birth:</td>
+                                <td>{{pl.birthDate}}</td>
+                            </tr>
+                            <tr>
+                                <td>Country</td>
+                                <td>{{pl.country}}</td>
+                            </tr>
+                            <tr>
+                                <td>City:</td>
+                                <td>{{pl.city}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <hr>
+                    <button type="button" name="edit" onclick="location.href = '/editprofile';">Edit Profile</button>
+                </div>
+            </div>
   
-   {% block content %}
-            {% if errorList %}
-                <ul>
-                    {% for error in errorList %}
-                        <li>{{error}}</li>
-                        {% endfor %}
-                </ul>
-            {% endif %}
-      
-       <form>    
-       <img style="width:200px; height: 200px;" name="profileImage" src="{{pl.profilePicPath}}" alt="profile picture" />
-       <button type="button" name="edit" onclick="location.href='/editprofile';">Edit Profile</button>
-       <p><span>Name:</span><span>{{pl.name}}</span></p>
-       <p><span>Birth Date:</span><span>{{pl.birthDate}}</span></p>
-          <p><span>Gender:</span><span>{{pl.gender}}</span></p>
-       <p><span>Country:</span><span>{{pl.country}}</span></p>
-       <p><span>City:</span><span>{{pl.city}}</span></p>
-       <hr>
-       
-       
-       <p><span>Language:</span><span>{{pl.language}}</span></p>
-       <p><span>Additional Info:</span><span>{{pl.additionalInfo}}</span></p>
-       
-       </form>
-       {% endblock %}{# empty Twig template #}
+            <div class="row mb-5">
+                <div class="col-md-12 align-self-center"></div>
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <table class="table table-sm table-bordered-left table-dark">
+                        <thead>
+                        <h4 class="pt-3">BASICS:</h4>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">Gender:</th>
+                                <td>{{pl.gender}}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Language:</th>
+                                <td>{{pl.language}}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Hair Color:</th>
+                                <td>{{pl.hairColour}}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Skin Color:</th>
+                                <td>{{pl.skinColour}}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Height:</th>
+                                <td>{{pl.height}} cm.</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Weight:</th>
+                                <td>{{pl.weight}} kg.</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Body Type:</th>
+                                <td>{{pl.bodyType}}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Occupation:</th>
+                                <td>{{pl.occupation}}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Sexual Orientation:</th>
+                                <td>{{pl.sexualOrientation}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-7">
+                    <p><h3> About Me:</h3><br>
+                    {{pl.additionalInfo}}
+                    </p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+   
+{% endblock %}
