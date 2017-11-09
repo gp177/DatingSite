@@ -5,6 +5,7 @@
         <link rel="stylesheet" type="text/css" href='/styles.css'>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
         <link rel="stylesheet" href="https://pingendo.com/assets/bootstrap/bootstrap-4.0.0-beta.1.css" type="text/css"> </head>
+<<<<<<< HEAD
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
     <meta charset="UTF-8">
     <title>{% block title %}Default{% endblock %}</title>
@@ -49,6 +50,61 @@
                 </div>    
 
             {% endif %}
+=======
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
+        <meta charset="UTF-8">
+        <title>{% block title %}Default{% endblock %}</title>
+       {% block headextra %} {% endblock %}
+    </head>
+    <body>
+          <nav class="navbar navbar-expand-md bg-primary navbar-dark">
+    <div class="container">
+      <a class="navbar-brand" href="/"><i class="fa d-inline fa-lg fa-heart"></i><b> Dating Website</b></a>
+      
+      {% if userSession %}
+          
+      <div class="collapse navbar-collapse text-center justify-content-end" id="navbar2SupportedContent">
+        <ul class="navbar-nav">
+          <li class="">
+            <span class="navbar-text navbar-right" href="">You're logged in as : <img src="{{userSession.profilePicPath}}" width="20" height="20"> {{ userSession.name }} &nbsp;</span>
+          </li>
+        </ul>
+          <a class="navbar-text navbar-link" href='/logout'><u>Logout</u></a>
+        <ul class="navbar-nav"></ul>
+      </div>  
+          
+      
+     {% else %}
+          
+       <div class="collapse navbar-collapse text-center justify-content-end" id="navbar2SupportedContent">
+        <ul class="navbar-nav">
+          <li class="">
+            <span class="navbar-text navbar-right" href="">You're not logged in. You may  &nbsp;</span>
+          </li>
+          <li>
+              <a class="navbar-text navbar-link " href='/login'> <u>Login</u></a>  
+         </li>
+         <li>
+             <span class="navbar-text">&nbsp;or&nbsp;</span>  
+         </li>
+         <li>
+             <a class="navbar-text navbar-link" href='/register'><u>Register</u></a>  
+         </li>
+        </ul>
+      
+      </div>    
+          
+    {% endif %}
+    </div>
+  </nav>
+        <div id="centeredContent">
+            
+        
+            
+            
+               {% block content %} {% endblock %}
+               
+>>>>>>> dc994d1d27246a0d0004d806f89aad164d82a251
         </div>
     </nav>
     <div id="centeredContent">
