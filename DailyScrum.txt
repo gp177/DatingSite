@@ -60,7 +60,14 @@ Date and Name
 2. finish warn and ban user for admins, add to panel.
 3. Help on site design
 
+
 11/09/2017 Oleksii Redko
 1. finished profile and edit with basic design
 2. navigation on site , view all profiles with search, view someone's profile
 3. discuss navigation with teammate
+
+
+11/09/2017 Giorgio Plescia,
+1. added restrictions to admin pages, fixed login, registration and master, started working on chat
+2. attempt to finish chat, finish a UI for admin panel and start tickets
+3. try to revamp the site layout, many designs wont work.
