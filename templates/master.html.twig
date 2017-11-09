@@ -13,18 +13,24 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-md bg-danger navbar-dark">
-        <div class="container">
+        <div class="container-fluid">
             <a class="navbar-brand" href="/"><i class="fa d-inline fa-lg fa-heart"></i><b> Dating Website</b></a>
 
             {% if userSession %}
-
+                
                 <div class="collapse navbar-collapse text-center justify-content-end" id="navbar2SupportedContent">
+                    <div class='container'>
+                    <button type="button" class="btn btn-light">My profile</button>
+                    <button type="button" class="btn btn-light">Search</button>
+                    <button type="button" class="btn btn-light">My Chats</button>
+                    <button type="button" class="btn btn-light">Help</button>
+                    </div>
                     <ul class="navbar-nav">
                         <li class="">
-                            <span class="navbar-text navbar-right" href="">You're logged in as : <img style="border-radius: 20px 20px 20px" src="{{ userSession.profilePicPath }}" width="20" height="20"> {{ userSession.name }} &nbsp;</span>
+                            <span class="navbar-text navbar-right" href=""><a href='/profile'><img style="border-radius: 20px 20px 20px" src="{{ userSession.profilePicPath }}" width="20" height="20"> {{ userSession.name }}</a> &nbsp;</span>
                         </li>
                     </ul>
-                    <a class="navbar-text navbar-link" href='/logout'>Logout</a>
+                    <a class="btn btn-secondary " href='/logout'>Logout</a>
                     <ul class="navbar-nav"></ul>
                 </div>  
 
