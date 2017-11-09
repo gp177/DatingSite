@@ -13,17 +13,17 @@
     <body>
           <nav class="navbar navbar-expand-md bg-primary navbar-dark">
     <div class="container">
-      <a class="navbar-brand" href="#"><i class="fa d-inline fa-lg fa-cloud"></i><b>Dating Website</b></a>
+      <a class="navbar-brand" href="/"><i class="fa d-inline fa-lg fa-cloud"></i><b>Dating Website</b></a>
       
       {% if userSession %}
           
       <div class="collapse navbar-collapse text-center justify-content-end" id="navbar2SupportedContent">
         <ul class="navbar-nav">
           <li class="">
-            <span class="navbar-text navbar-right" href="">You're logged in as : {{ userSession.name }} &nbsp;</span>
+            <span class="navbar-text navbar-right" href="">You're logged in as : <img src="{{userSession.profilePicPath}}" width="20" height="20"> {{ userSession.name }} &nbsp;</span>
           </li>
         </ul>
-        <a class="navbar-text navbar-link" href='/logout'>Logout</a>
+          <a class="navbar-text navbar-link" href='/logout'><u>Logout</u></a>
         <ul class="navbar-nav"></ul>
       </div>  
           
@@ -36,13 +36,13 @@
             <span class="navbar-text navbar-right" href="">You're not logged in. You may  &nbsp;</span>
           </li>
           <li>
-            <a class="navbar-text navbar-link " href='/login'>Login</a>  
+              <a class="navbar-text navbar-link " href='/login'> <u>Login</u></a>  
          </li>
          <li>
              <span class="navbar-text">&nbsp;or&nbsp;</span>  
          </li>
          <li>
-            <a class="navbar-text navbar-link" href='/register'>Register</a>  
+             <a class="navbar-text navbar-link" href='/register'><u>Register</u></a>  
          </li>
         </ul>
       
