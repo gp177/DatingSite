@@ -19,7 +19,7 @@ $app->get('/profile', function() use ($app, $log) {
             $app->render('not_found.html.twig');
             return;
         } else {
-
+  
             $app->render('profile.html.twig', array('pl' => $profileList));
            
         }
@@ -136,15 +136,13 @@ $app->get('/profile/:id', function($id) use ($app) {
                 $app->render('access_denied.html.twig');
                 return;
             }
-
-            //
-            if ($id != -1) {
-                
-                $profile = DB::query('SELECT * FROM users WHERE users.id=%i', $id);
+            
+                $profile = DB::queryFirstRow('SELECT * FROM users WHERE id=%i', $id);
                 if (!$profile) {
                     echo "User Not Found";
                     return;
                 }
+<<<<<<< HEAD
             } else {
                 $profile = array();
             }
@@ -152,4 +150,10 @@ $app->get('/profile/:id', function($id) use ($app) {
             
         })
         ->conditions(array( 'id' => '\d+'  ));
+=======
+               
+                $app->render('profile.html.twig', array('pl' => $profile));
+        });
+//        ->conditions(array( 'id' => '\d+'  ));
+>>>>>>> 6bdedef6ebe4de7da957852f8bfd3b95bd1122ab
 

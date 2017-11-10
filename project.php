@@ -56,6 +56,9 @@ $log->pushHandler(new StreamHandler('logs/errors.log', Logger::ERROR));
 $twig = $app->view()->getEnvironment();
 $twig->addGlobal('userSession', $_SESSION['user']);
 
+$admin=DB::query('SELECT * From admins where id=%s and  username=%s',$_SESSION['user']['id'], $_SESSION['user']['username'] );
+$twig->addGlobal('adminSession',$admin);
+
 if (!isset($_SESSION['user'])) {
     $_SESSION['user'] = array();
 }
