@@ -42,10 +42,14 @@
                         </tbody>
                     </table>
                     <hr>
-                    <button type="button" name="edit" onclick="location.href = '/editprofile';">Edit Profile</button>
+                    {% if adminSession or  userSession.id!= pl.id %}
+                        <button type="button" name="edit" onclick="location.href = #;">Write a messege to {{pl.name}}</button>
+                    {% else %}
+                        <button type="button" name="edit" onclick="location.href = '/editprofile';">Edit Profile</button>
+                    {% endif %}
                 </div>
             </div>
-  
+
             <div class="row mb-5">
                 <div class="col-md-12 align-self-center"></div>
             </div>
@@ -104,5 +108,5 @@
             </div>
         </div>
     </div>
-   
+
 {% endblock %}
