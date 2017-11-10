@@ -64,10 +64,6 @@ if (!isset($_SESSION['user'])) {
 $app->get('/', function() use ($app) {
   
     
-    
-     
-    
-    
    $productList = DB::query('SELECT *, YEAR(CURRENT_TIMESTAMP) - YEAR(birthDate) - (RIGHT(CURRENT_TIMESTAMP, 5) < RIGHT(birthDate, 5)) as age FROM users');
     
   
@@ -84,13 +80,15 @@ $app->get('/', function() use ($app) {
 
 
 // ============================================================= PASSWORD REQUEST ================================================================
-require_once 'admin_user_warn.php';
+
 
 require_once 'password_request.php';
 
 
 
 // ============================================================= ADMINS TABLE ================================================================
+
+require_once 'admin_user_warn.php';
 
 require_once 'admin_panel.php';
     

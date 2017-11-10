@@ -3,7 +3,7 @@
 {% block title %}Posts{% endblock %}
 
 {% block content %}
-   
+    <div class="container">
     <h2>Total Users: {{userCount}}</h2>
     <br>
     <form method="get">            
@@ -11,7 +11,8 @@
         <input type="submit" value="Search"><br><br>
                      </form>
     
-    <table>
+       
+    <table class="table-bordered table-hover">
         <tr>
             <th>#</th>
             <th>Photo</th>
@@ -59,6 +60,6 @@
                 
          <button onclick="window.location.href='/admin/panel';">Go Back</button> <br>
  
-    
+        </div>
     
 {% endblock %}

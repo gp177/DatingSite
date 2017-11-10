@@ -26,7 +26,8 @@ $app->post('/admin/login',function() use ($app) {
     } else {
         unset($row['password']);
         $_SESSION['user'] = $row;
-        $app->render('/admin/admin_panel.html.twig', array('userSession' => $_SESSION['user']));
+        $app->render('/admin/admin_panel.html.twig', array('adminSession' => $_SESSION['user']));
+        header("Refresh:0; url=/admin/panel");
     }
     
 });

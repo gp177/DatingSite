@@ -21,6 +21,7 @@ $app->get('/profile', function() use ($app, $log) {
         } else {
 
             $app->render('profile.html.twig', array('pl' => $profileList));
+           
         }
     }
 });
@@ -148,6 +149,7 @@ $app->get('/profile/:id', function($id) use ($app) {
                 $profile = array();
             }
             $app->render('profile.html.twig', array('list' => $profile));
+            
         })
         ->conditions(array( 'id' => '\d+'  ));
 
