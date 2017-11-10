@@ -130,6 +130,7 @@ $app->post('/editprofile', function() use ($app, $log) {
 // ============================================================== USER SELECTION ==========================================================
 
 $app->get('/profile/:id', function($id) use ($app) {
+    
             if (!$_SESSION['user']) {
                 $app->render('access_denied.html.twig');
                 return;
@@ -146,7 +147,7 @@ $app->get('/profile/:id', function($id) use ($app) {
             } else {
                 $profile = array();
             }
-            $app->render('user.html.twig', array('list' => $profile));
+            $app->render('profile.html.twig', array('list' => $profile));
         })
         ->conditions(array( 'id' => '\d+'  ));
 

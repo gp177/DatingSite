@@ -4,12 +4,129 @@
 {% block title %}Admin Panel{% endblock %}
 
      {% block content %}
-         
-    
+     
+         <style>
+           body {
+  font-family: "Open Sans", "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.5em;
+  font-weight: 400;
+}
 
-    
-         
-  
+p, span, a, ul, li, button {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+}
 
- 
+strong {
+  font-weight: 600;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Open Sans", "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.5em;
+  font-weight: 300;
+}
+
+strong {
+  font-weight: 400;
+}
+
+.tile {
+  width: 100%;
+  display: inline-block;
+  box-sizing: border-box;
+  background: #fff;
+  padding: 20px;
+  margin-bottom: 30px;
+}
+.tile .title {
+  margin-top: 0px;
+}
+.tile.purple, .tile.blue, .tile.red, .tile.orange, .tile.green {
+  color: #fff;
+}
+.tile.purple {
+  background: #5133ab;
+}
+.tile.purple:hover {
+  background: #3e2784;
+}
+.tile.red {
+  background: #ac193d;
+}
+.tile.red:hover {
+  background: #7f132d;
+}
+.tile.green {
+  background: #00a600;
+}
+.tile.green:hover {
+  background: #007300;
+}
+.tile.blue {
+  background: #2672ec;
+}
+.tile.blue:hover {
+  background: #125acd;
+}
+.tile.orange {
+  background: #dc572e;
+}
+.tile.orange:hover {
+  background: #b8431f;
+}
+.center {
+    position: absolute;
+    width: 100px;
+    height: 50px;
+    top: 50%;
+    left: 50%;
+    margin-left: -50px; /* margin is -0.5 * dimension */
+    margin-top: -25px; 
+}​
+
+         </style>
+         
+      
+         <div class="container">
+  <div class="row">
+    <div class="col-md-12">
+        <h1 ><strong>Admin Panel</strong></h1>
+       
+        <br>
+    </div>
+  </div>
+             
+  <div class="row">
+    <div class="col-sm-4">
+        <a  href="/admin/panel/users">
+      <div class="tile purple">
+         <h3 class="title">  <span class="fa fa-users fa-4x"></span> Users</h3>
+      </div>
+               </a>
+    </div>
+    <div class="col-sm-4">
+        <a  href="#">
+      <div class="tile red">
+        <h3 class="title">  <span class="fa  fa-envelope-o fa-4x"></span> Tickets</h3>
+      </div>
+        </a>
+    </div>
+    <div class="col-sm-4">
+           <a  href="#">
+      <div class="tile green">
+        <h3 class="title"> <span class="fa  fa-bar-chart fa-4x"></span> Statistics</h3>
+      </div>
+           </a>
+    </div>
+  </div>
+</div>
+       
+         
+         
+         
+         
   {% endblock %}
