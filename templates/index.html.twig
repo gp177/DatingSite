@@ -6,14 +6,6 @@
 
 {% block content %}
 
-
-
-    <!--  <h5>This is a dating website</h5><br><br>
-      
-      <p>Register <a href="/register">Here</a><p><br>
-      <p>View your <a href="/profile">Profile</a></p><br>
-      <p>Log in to <a href="/admin/login">Admin Panel</a></p><br>
-      <p>Or <a href="/logout">Logout</a></p> -->
     <style>
         @import url(https://fonts.googleapis.com/css?family=Quicksand:400,300);
         body{
@@ -125,9 +117,10 @@
                 <div class="container py-5">
                     <div class="row">
                         <div class="col-md-12 text-white">
-                            <h1 class="display-3 mb-4">Hero image intro</h1>
-                            <p class="lead mb-5">Pingendo is a HTML editor for everyone. Easy for newbies, useful for professionals.
-                                <br>Code quality is a must. Pingendo generates clean, battle-tested, modular Bootstrap 4 code. </p>
+                            <h1 class="display-3 mb-4">Dating Website</h1>
+                            <p class="lead mb-5">Nulla faucibus lacus nec metus pretium, non porttitor neque vulputate. Duis porttitor dignissim ligula, id feugiat dolor consectetur in. 
+                                Duis ut nibh sit amet felis fringilla convallis. Ut ultricies ipsum in neque laoreet, nec lacinia arcu vestibulum. Praesent consectetur arcu nibh, non aliquet 
+                                metus malesuada a. </p>
                             <a href="#" class="btn btn-lg mx-1 btn-secondary">A claim here</a>
                             <a href="#" class="btn btn-lg btn-primary mx-1">Your call to action</a>
                         </div>
@@ -136,7 +129,7 @@
             </div>
 
          
-            <section class="team">
+            <section  class="team">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-10 col-md-offset-1">
@@ -146,7 +139,7 @@
                                       {% for u in list %}
                                     <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 profile">
                                         <div class="img-box">
-                                            <img src="{{u.profilePicPath}}" class="img-fluid">
+                                            <img src="{{u.profilePicPath}}" class="img-fluid" >
                                             <ul class="text-center">
                                                 <a href="#"><li><i class="fa fa-facebook"></i></li></a>
                                                 <a href="#"><li><i class="fa fa-twitter"></i></li></a>
