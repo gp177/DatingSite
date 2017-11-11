@@ -102,6 +102,8 @@ require_once 'admin_register.php';
 
 // ============================================================= USERS TABLE ================================================================
 
+require_once 'user_ticket.php';
+
 require_once 'chat.php';
 
 require_once 'login_logout.php';

@@ -1,0 +1,50 @@
+{% extends "master.html.twig" %}
+
+{% block title %}Tickets{% endblock %}
+
+{% block content %}
+    <div class="container">
+   
+    
+       
+    <table class="table-bordered table-hover">
+        <tr>
+            <th>#</th>
+            <th>Photo</th>
+            <th>username</th>
+              <th>Department</th>
+                <th>Description</th>
+                <th>Actions</th>
+            
+        </tr>
+    
+    {% for p in list %}
+        <tr>
+      <td>{{p.id}}</td>
+      <td><img src="{{p.profilePicPath}}" width="80" height="80"></td>
+            <td>{{p.username}}</td>
+             <td>{{p.department}}</td>
+              <td>{{p.description}}</td>
+              <td>{{p.description}}</td>
+              <td>
+               <a href="/admin/panel/warn/{{p.id}}">Respond</a> 
+               <a href="/admin/panel/ban/{{p.id}}">Delete</a> 
+              </td>
+                
+                    
+        </tr>
+        
+      
+            {% else %}
+            <tr><td colspan="6">There are no Tickets</td></tr>
+                
+                {% endfor %}
+    </table>
+    
+    <br>
+                
+         <button onclick="window.location.href='/admin/panel';">Go Back</button> <br>
+ 
+        </div>
+    
+{% endblock %}

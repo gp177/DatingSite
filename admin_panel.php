@@ -5,6 +5,33 @@ if (false) {
     $log = new Logger('main');
 }
 
+
+
+
+
+
+// ================================================== ticket list
+
+$app->get('/admin/panel/tickets', function() use ($app) {
+    
+       
+          
+    $adminvalid = DB::query('SELECT * FROM admins WHERE id=%i', $_SESSION['user']['id']);
+    
+    if (!$adminvalid) {
+         $app->render('access_denied.html.twig');
+        return;
+    }
+
+        
+    $productList = DB::query("SELECT * FROM tickets INNER JOIN users ON tickets.userId = users.id");
+    
+    
+    $app->render('/admin/admin_tickets.html.twig', array('list' => $productList));
+});
+
+
+
 // ================================================== users list
 
 $app->get('/admin/panel/users', function() use ($app) {

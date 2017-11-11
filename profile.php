@@ -142,7 +142,7 @@ $app->get('/profile/:id', function($id) use ($app) {
                     echo "User Not Found";
                     return;
                 }
-<<<<<<< HEAD
+
             } else {
                 $profile = array();
             }
@@ -150,10 +150,10 @@ $app->get('/profile/:id', function($id) use ($app) {
             
         })
         ->conditions(array( 'id' => '\d+'  ));
-=======
+
                
                 $app->render('profile.html.twig', array('pl' => $profile));
         });
 //        ->conditions(array( 'id' => '\d+'  ));
->>>>>>> 6bdedef6ebe4de7da957852f8bfd3b95bd1122ab
+
 
