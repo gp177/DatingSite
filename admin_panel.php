@@ -9,6 +9,61 @@ if (false) {
 
 
 
+// ========================================================== ticket response
+
+$app->get('/admin/panel/tickets/respond/:id', function($id) use ($app) {
+    
+     $adminvalid = DB::query('SELECT * FROM admins WHERE id=%i', $_SESSION['user']['id']);
+    
+    if (!$adminvalid) {
+         $app->render('access_denied.html.twig');
+        return;
+    }
+    
+   // $tickets = DB::query('SELECT * FROM tickets WHERE tickets.id =%i', $id);
+    
+      $ticketrespond = DB::query('SELECT * FROM ticketmessages INNER JOIN tickets ON ticketmessages.ticketId = tickets.id INNER JOIN admins ON ticketmessages.adminId = admins.id  WHERE tickets.id=%i', $id);
+     
+  
+       $app->render('/admin/admin_tickets_respond.html.twig', array('list' => $ticketrespond));
+});
+
+$app->post('/admin/panel/tickets/respond/:id', function($id) use ($app) {
+
+   $adminvalid = DB::query('SELECT * FROM admins WHERE id=%i', $_SESSION['user']['id']);
+    
+    if (!$adminvalid) {
+         $app->render('access_denied.html.twig');
+        return;
+    }
+
+    $messages = $app->request()->post('messages');
+    $adminId = $_SESSION['user']['id'];
+    
+
+
+    //
+
+    $values = array('adminId' => $adminId, 'ticketId'=> $id, 'messages' => $messages);
+    $errorList = array();
+    //
+
+  
+    //
+    if ($errorList) { // 3. failed submission
+        $app->render('post_new.html.twig', array(
+            'errorList' => $errorList,
+            'v' => $values));
+    } else { // 2. successful submission
+        DB::insert('ticketmessages', $values);
+        
+   
+    
+    }
+});
+
+
+
 
 // ================================================== ticket list
 
@@ -24,7 +79,7 @@ $app->get('/admin/panel/tickets', function() use ($app) {
     }
 
         
-    $productList = DB::query("SELECT * FROM tickets INNER JOIN users ON tickets.userId = users.id");
+    $productList = DB::query("SELECT tickets.id AS tickid, tickets.userId, tickets.department, tickets.description, users.id, users.username, users.profilePicPath FROM tickets INNER JOIN users ON tickets.userId = users.id");
     
     
     $app->render('/admin/admin_tickets.html.twig', array('list' => $productList));

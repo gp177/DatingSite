@@ -49,6 +49,7 @@ $app->post('/tickets', function() use ($app) {
       
         
     DB::insert('tickets', $values);
+    
    $app->render('index.html.twig');
    header("Refresh:0; url=/");
    
