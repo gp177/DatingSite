@@ -2,6 +2,48 @@
 
 
 {% block content %}
+    
+    <h2>Current Opened Tickets</h2>
+      <div class="container">
+   
+    
+       
+    <table class="table-bordered table-hover">
+        <tr>
+            <th>Photo</th>
+            <th>username</th>
+              <th>Department</th>
+                <th>Description</th>
+                <th>Actions</th>
+            
+        </tr>
+    
+    {% for p in list %}
+        <tr>
+      <td><img src="{{p.profilePicPath}}" width="80" height="80"></td>
+            <td>{{p.username}}</td>
+             <td>{{p.department}}</td>
+              <td>{{p.description}}</td>
+              
+              <td>
+               <a href="/tickets/view/{{p.tickid}}">View</a> 
+               <a href="#">Delete</a> 
+              </td>
+                
+                    
+        </tr>
+        
+      
+            {% else %}
+            <tr><td colspan="6">There are no Tickets</td></tr>
+                
+                {% endfor %}
+    </table>
+    
+    <br>
+             
+ 
+        </div>
             {% if errorList %}
                 <ul>
                     {% for error in errorList %}

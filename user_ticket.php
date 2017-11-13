@@ -5,18 +5,77 @@ if (false) {
     $log = new Logger('main');
 }
 
+// ========================================================== ticket response
+
+$app->get('/tickets/view/:id', function($id) use ($app) {
+    
+     $users = DB::query('SELECT * FROM users WHERE id=%i', $_SESSION['user']['id']);
+     
+        if (!$users) {
+         $app->render('access_denied.html.twig');
+        return;
+    }
+    
+   
+      $ticketrespond = DB::query('SELECT * FROM ticketmessages INNER JOIN tickets ON ticketmessages.ticketId = tickets.id INNER JOIN admins ON ticketmessages.adminId = admins.id  WHERE tickets.id=%i', $id);
+     
+  
+       $app->render('user_ticket_open.html.twig', array('list' => $ticketrespond));
+});
+
+$app->post('/tickets/view/:id', function($id) use ($app) {
+
+    $users = DB::query('SELECT * FROM users WHERE id=%i', $_SESSION['user']['id']);
+     if (!$users) {
+         $app->render('access_denied.html.twig');
+        return;
+    }
+
+    $messages = $app->request()->post('messages');
+    $userId = $_SESSION['user']['id'];
+    
+
+
+    //
+
+    $values = array('userId' => $userId, 'ticketId'=> $id, 'messages' => $messages);
+    $errorList = array();
+    //
+
+  
+    //
+    if ($errorList) { // 3. failed submission
+        $app->render('post_new.html.twig', array(
+            'errorList' => $errorList,
+            'v' => $values));
+    } else { // 2. successful submission
+        DB::insert('ticketmessages', $values);
+        
+   
+    
+    }
+});
+
+
+
+
+
+// ================================================================ user tickets
 
 $app->get('/tickets', function() use ($app) {
     
     
   $users = DB::query('SELECT * FROM users WHERE id=%i', $_SESSION['user']['id']);
+  $userid = $_SESSION['user']['id'];
+  
+   $productList = DB::query("SELECT tickets.id AS tickid, tickets.userId, tickets.department, tickets.description, users.id, users.username, users.profilePicPath FROM tickets INNER JOIN users ON tickets.userId = users.id WHERE tickets.userId=%s", $userid);
     
     if (!$users) {
          $app->render('access_denied.html.twig');
         return;
     }
     
-    $app->render('user_ticket.html.twig');
+    $app->render('user_ticket.html.twig', array('list' => $productList));
 });
 
 $app->post('/tickets', function() use ($app) {

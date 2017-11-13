@@ -1,0 +1,39 @@
+{% extends "master.html.twig" %}
+
+{% block title %}Ticket Respond{% endblock %}
+
+{% block content %}
+    
+ 
+     <html>
+    <body>
+      
+              <div class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3"> </div>
+        <div class="col-md-6">
+          <div class="card text-white p-5 bg-primary" style="">
+            <div class="card-body">
+                    {% for p in list %}
+                        <p>{{p.date}} {{p.username}}:  <b>{{p.messages}}</b></p>
+                    {% endfor %}<br><br><hr>
+               <form method="post">
+
+                   <div class="form-group"> <label>Message</label>
+                  <textarea value="{{v.messages}}"  name="messages" class="form-control" placeholder="Enter Message" rows="4" cols="50"></textarea> </div>
+                 <button type="submit" class="btn btn-secondary">Send</button>
+              </form>
+                             
+                </div>    
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  
+  
+</body>
+</html>
+    {% endblock %}
