@@ -56,6 +56,9 @@ $log->pushHandler(new StreamHandler('logs/errors.log', Logger::ERROR));
 $twig = $app->view()->getEnvironment();
 $twig->addGlobal('userSession', $_SESSION['user']);
 
+$admin=DB::query('SELECT * From admins where id=%s and  username=%s',$_SESSION['user']['id'], $_SESSION['user']['username'] );
+$twig->addGlobal('adminSession',$admin);
+
 if (!isset($_SESSION['user'])) {
     $_SESSION['user'] = array();
 }
@@ -63,10 +66,6 @@ if (!isset($_SESSION['user'])) {
 // ============================================================= INDEX ================================================================
 $app->get('/', function() use ($app) {
   
-    
-    
-     
-    
     
    $productList = DB::query('SELECT *, YEAR(CURRENT_TIMESTAMP) - YEAR(birthDate) - (RIGHT(CURRENT_TIMESTAMP, 5) < RIGHT(birthDate, 5)) as age FROM users');
     
@@ -84,13 +83,15 @@ $app->get('/', function() use ($app) {
 
 
 // ============================================================= PASSWORD REQUEST ================================================================
-require_once 'admin_user_warn.php';
+
 
 require_once 'password_request.php';
 
 
 
 // ============================================================= ADMINS TABLE ================================================================
+
+require_once 'admin_user_warn.php';
 
 require_once 'admin_panel.php';
     
@@ -100,6 +101,8 @@ require_once 'admin_register.php';
 
 
 // ============================================================= USERS TABLE ================================================================
+
+require_once 'user_ticket.php';
 
 require_once 'chat.php';
 

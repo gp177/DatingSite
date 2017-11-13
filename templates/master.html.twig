@@ -19,13 +19,23 @@
             {% if userSession %}
                 
                 <div class="collapse navbar-collapse text-center justify-content-end" id="navbar2SupportedContent">
+                    
                     <div class='container'>
+
                     <button type="button" onclick="location.href='/profile';" class="btn btn-light">My profile</button>
-                    <button type="button"  class="btn btn-light">Search</button>
+                    <button type="button" onclick="location.href='/';"  class="btn btn-light">Search</button>
                     <button type="button" onclick="location.href='/chats';" class="btn btn-light">My Chats</button>
-                    <button type="button" class="btn btn-light">Help</button>
+                    <button type="button"  onclick="location.href='/tickets';" class="btn btn-light">Help</button>
+                        
+                     {% if adminSession %}   
+                  
+                     <button type="button"  onclick="location.href = '/admin/panel';">Admin panel</button>
+                   
+                     {% endif %}
+
                     </div>
                     <ul class="navbar-nav">
+                        
                         <li class="">
                             <span class="navbar-text navbar-right" href=""><a href='/profile'><img style="border-radius: 20px 20px 20px" src="{{ userSession.profilePicPath }}" width="20" height="20"> {{ userSession.name }}</a> &nbsp;</span>
                         </li>
