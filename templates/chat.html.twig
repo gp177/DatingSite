@@ -1,119 +1,100 @@
 {% extends "master.html.twig" %}
 
 {% block title %}Chats{% endblock %}
+{% block headextra %}
+    <script>
+          function loadPage(cid) {
+            $('#chatBox').load("/chats/" + cid);
+            window.history.pushState("", "Chats", "/chats/" + cid);  
+        }
+    </script>
+{% endblock %}
 
 {% block content %}
     <style>
         .chatperson{
-  display: block;
-  border-bottom: 1px solid #eee;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  white-space: nowrap;
-  overflow: hidden;
-  margin-bottom: 15px;
-  padding: 4px;
-}
-.chatperson:hover{
-  text-decoration: none;
-  border-bottom: 1px solid orange;
-}
-.namechat {
-    display: inline-block;
-    vertical-align: middle;
-}
-.chatperson .chatimg img{
-  width: 40px;
-  height: 40px;
-  background-image: url('http://i.imgur.com/JqEuJ6t.png');
-}
-.chatperson .pname{
-  font-size: 18px;
-  padding-left: 5px;
-}
-.chatperson .lastmsg{
-  font-size: 12px;
-  padding-left: 5px;
-  color: #ccc;
-}
+            display: block;
+            border-bottom: 1px solid #eee;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+            overflow: hidden;
+            margin-bottom: 15px;
+            padding: 4px;
+        }
+        .chatperson:hover{
+            text-decoration: none;
+            border-bottom: 1px solid orange;
+        }
+        .namechat {
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .chatperson .chatimg img{
+            width: 40px;
+            height: 40px;
+            background-image: url('http://i.imgur.com/JqEuJ6t.png');
+        }
+        .chatperson .pname{
+            font-size: 18px;
+            padding-left: 5px;
+        }
+        .chatperson .lastmsg{
+            font-size: 12px;
+            padding-left: 5px;
+            color: #ccc;
+        }
     </style>
     <div class="container">
-	<div class="row">
-                 <div class="col-sm-4">
-                  <a href="?msg=15" class="chatperson">
+        <div class="row">
+            <div class="col-sm-4">
+                
+                
+                
+                 {% for chat in chatList  %}
+                <a href="javascript:loadPage({{chat.id}})"  class="chatperson">
                     <span class="chatimg">
-                        <img src="http://via.placeholder.com/50x50?text=A" alt="" />
+                        <img src="{{chat.user2Pic}}" alt="" />
                     </span>
                     <div class="namechat">
-                        <div class="pname">Aperson name here</div>
+                        <div class="pname">{{chat.user2}}</div>
                         <div class="lastmsg">sdk nskdfjnlssdf sdf ss fsdaf kjlsadjf nkksaddbhk jasddl sdf kjsdfoashf89f sdbfoi nkksaddbhk jasddl</div>
+                         <button  onclick="loadPage({{chat.id}});">Click</button>
                     </div>
-                </a><a href="?msg=16" class="chatperson">
-                    <span class="chatimg">
-                        <img src="http://via.placeholder.com/50x50?text=D" alt="" />
-                    </span>
-                    <div class="namechat">
-                        <div class="pname">D personname</div>
-                        <div class="lastmsg">sdk nskdfjnlssdf sdf ss fsdaf kjlsadjf nkksaddbhk jasddl sdf kjsdfoashf89f sdbfoi nkksaddbhk jasddl</div>
-                    </div>
-                </a><a href="?msg=17" class="chatperson">
-                    <span class="chatimg">
-                        <img src="http://via.placeholder.com/50x50?text=W" alt="" />
-                    </span>
-                    <div class="namechat">
-                        <div class="pname">WWW</div>
-                        <div class="lastmsg">sdk nskdfjnlssdf sdf ss fsdaf kjlsadjf nkksaddbhk jasddl sdf kjsdfoashf89f sdbfoi nkksaddbhk jasddl</div>
-                    </div>
+
                 </a>
-                 </div>
-                 <div class="col-sm-8">
-                  <div class="chatbody">
 
-                  <table class="table">
-                    <tr>
-                      <td><img src="http://via.placeholder.com/50x50?text=A" /></td>
-                      <td>sdk fnsdkjnsadjnlk anflkjasdnflk kjasndlkfjnsdfs adfjksd ofh saddf lsdnflksnadl fjnasdfl ajsndflkja nlnfsdjlnf aslnfd as</td>
-                      <td>15:20</td>
-                    </tr>
+                 {% endfor %}
+             
+            </div>
+            <div class="col-sm-8">
+                <div id="chatBox" class="chatbody">
 
-                    <tr>
-                      <td><img src="http://via.placeholder.com/50x50?text=B" /></td>
-                      <td>sdk fnsdkjnsadjnlk adfjksd ofh saddf lsdnflksnadl fjnasdfl ajsndflkja nlnfsdjlnf aslnfd as</td>
-                      <td>15:20</td>
-                    </tr>
+                    {#<table class="table">
+                        
+                        
+                        <tr>
+                            <td><img src="" /></td>
+                            <td>sdk fnsdkjnsadjnlk anflkjasdnflk kjasndlkfjnsdfs adfjksd ofh saddf lsdnflksnadl fjnasdfl ajsndflkja nlnfsdjlnf aslnfd as</td>
+                            <td>15:20</td>
+                        </tr>
 
-                    <tr>
-                      <td><img src="http://via.placeholder.com/50x50?text=A" /></td>
-                      <td>sdk fnsdkjnsadjnlk anflkjasdnflk kjasndl sdflksnfl jsdkfjsafkjsnd fnsalddf sdjdknkfjnsdfs adfjksd ofh saddf lsdnflksnadl fjnasdfl ajsndflkja nlnfsdjlnf aslnfd as</td>
-                      <td>15:20</td>
-                    </tr>
+                        
+                    </table>#}
 
-                    <tr>
-                      <td><img src="http://via.placeholder.com/50x50?text=B" /></td>
-                      <td>sdk sf s aslnfd as</td>
-                      <td>15:20</td>
-                    </tr>
+                </div>
 
-                    <tr>
-                      <td><img src="http://via.placeholder.com/50x50?text=A" /></td>
-                      <td>sdk fnsdkjnsadjnlk anflkjasdnflk c vlsndl v slkdknf sdkmnfkfsndf kasndfllk asnddlflkn sadfn  sadn sandf sadf sajdf sdf sdflksnfl jsdkfjsafkjsnd fnsalddf sdjdknkfjnsdfs adfjksd ofh saddf lsdnflksnadl fjnasdfl ajsndflkja nlnfsdjlnf aslnfd as</td>
-                      <td>15:20</td>
-                    </tr>
-                  </table>
-
-                  </div>
-
-                  <div class="row">
+                <div class="row">
                     <div class="col-xs-9">
-                      <input type="text" placeholder="Enter message" class="form-control" />
+                        <input type="text" placeholder="Enter message" class="form-control" />
                     </div>
                     <div class="col-xs-3">
-                      <button class="btn btn-primary btn-block">Send</button>
+                        <button class="btn btn-primary btn-block" >Send</button>
                     </div>
-                  </div>
+                </div>
 
-                 </div>
-             </div>
-</div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
