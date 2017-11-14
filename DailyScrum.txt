@@ -97,3 +97,9 @@ Date and Name
 1. start working on chats, have en error on ajax load
 2. finish chats, albums
 3. ask about teacher, teammate or someone in class  
+
+
+11/14/2017 Giorgio Plescia,
+1. added dual communication to ticketing system, started on notifications
+2. need to fix single user message problem with ticket chatting
+3. discuss ideas for user notification viewing.
