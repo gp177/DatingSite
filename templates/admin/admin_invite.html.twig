@@ -1,7 +1,7 @@
 {% extends "master.html.twig" %}
 
 
-{% block title %}Forgotten Password{% endblock %}
+{% block title %}Admin Invite{% endblock %}
 
 {% block content %}
 
@@ -9,8 +9,7 @@
     
     {% if error %}
         
-        <p>We weren't able to find the email ou provided in our records,
-            try again or <a href='/register'>Register</a> a new account.</p>  
+        <p>No Email Found</p>  
         {% endif %}
             
 
@@ -24,7 +23,7 @@
         <div class="col-md-6">
           <div class="card text-white p-5 bg-primary" style="" >
             <div class="card-body">
-              <p>Enter your email below and we'll send you password reset link</p>
+              <p>Enter the users email below you wish to invite to the Admin role</p>
               <form method="post">
                 <div class="form-group"> <label>Email</label>
                   <input type="email"  name="email" class="form-control" placeholder="Enter Email"> </div>
@@ -40,3 +39,4 @@
 </html>
 
 {% endblock %}
+

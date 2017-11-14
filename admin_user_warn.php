@@ -19,7 +19,7 @@ $app->map('/admin/panel/warn/:id', function($id) use ($app, $log) {
         
      
         
-        $emailBody = $app->view()->render('admin/user_warn_email.html.twig', array('user' => $user, 'reason'=>$reason ));
+        $emailBody = $app->view()->render('admin/admin_invite_form.html.twig', array('user' => $user, 'reason'=>$reason ));
         
         $headers = "MIME-Version: 1.0\r\n";
         $headers .= "Content-type: text/html\r\n";

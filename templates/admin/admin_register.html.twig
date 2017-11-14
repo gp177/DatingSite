@@ -40,7 +40,16 @@
             {% endif %}
 
 
-
+<html>
+    <body>
+    <div class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3"> </div>
+        <div class="col-md-6">
+          <div class="card text-white p-5 bg-primary" style="">
+            <div class="card-body">
+              <h1 class="mb-4">Admin Register</h1>
 <form method="post" enctype="multipart/form-data">
     Username: <input type="text" name="username" value="{{v.username}}"> <span id="UisTaken"></span><br>
     Email: <input type="email" name="email" value="{{v.email}}"><span id="isTaken"></span><br>
@@ -48,4 +57,12 @@
     Password(repeat): <input type="password" name="pass2"><br>
     <input type="submit" value="Register">
 </form>
+    </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
        {% endblock %}
