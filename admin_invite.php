@@ -5,29 +5,29 @@ if (false) {
     $log = new Logger('main');
 }
 
-function generateRandomString($length = 10) {
-    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    $charactersLength = strlen($characters);
-    $randomString = '';
-    for ($i = 0; $i < $length; $i++) {
-        $randomString .= $characters[rand(0, $charactersLength - 1)];
-    }
-    return $randomString;
-}
 
 
 
 $app->map('/admin/panel/invite', function() use ($app, $log) {
     
+    $adminvalid = DB::query('SELECT * FROM admins WHERE id=%i', $_SESSION['user']['id']);
+    
+    if (!$adminvalid) {
+         $app->render('access_denied.html.twig');
+        return;
+    }
+    
+    
     if ($app->request()->isGet()) {
-        $app->render('/admin/admin_invite.html.twig');
+         $users = DB::query("SELECT * FROM users");
+        $app->render('/admin/admin_invite.html.twig', array('list' => $users));
         return;
     }
     // in post - receiving submission
     $email = $app->request()->post('email');
     $user = DB::queryFirstRow("SELECT * FROM users WHERE email=%s", $email);
-    if ($user) {
-        
+    if ($user) { 
+      
        $secretToken = generateRandomString(50);
        DB::insertUpdate('passresets', array('userId' => $user['id'], 'secretToken' => $secretToken, 'expiryDateTime' => date("y-m-d H:i:s", strtotime("+1 day"))));
         
@@ -41,7 +41,7 @@ $app->map('/admin/panel/invite', function() use ($app, $log) {
         
         mail($toEmail, "Admin invitation for " . $_SERVER['SERVER_NAME'], $emailBody, $headers);
         
-        $app->render('/admin/admin_panel.html.twig');
+        echo "Invitation Sent!";
  
     }
     else { // failed request
@@ -51,7 +51,7 @@ $app->map('/admin/panel/invite', function() use ($app, $log) {
 })->via('GET', 'POST');
 
 
-$app->map('/admin/panel/invite/:secretToken', function($secretToken) use ($app, $log) {
+$app->map('/admin/register/:secretToken', function($secretToken) use ($app, $log) {
     
     $row = DB::queryFirstRow('SELECT * FROM passresets WHERE secretToken=%s', $secretToken);
     
@@ -64,7 +64,72 @@ $app->map('/admin/panel/invite/:secretToken', function($secretToken) use ($app, 
         $app->render('not_found.html.twig');
         return;
     }
+    $username = $app->request()->post('username');
+    $email = $app->request()->post('email');
+    $pass1 = $app->request()->post('pass1');
+    $pass2 = $app->request()->post('pass2');
+        
     
-     $app->render('admin/panel/register.html.twig');
+   $passEnc = password_hash($pass1, PASSWORD_BCRYPT);
+     $values = array('username'=> $username, 'email' => $email, 'password' => $passEnc);
+     
+    $errorList = array();
+    //
+    
+    if (filter_var($email, FILTER_VALIDATE_EMAIL) == FALSE) {
+        $values['email'] = '';
+        array_push($errorList, "Email must look like a valid email");
+    } 
+    
+    else {
+        $row = DB::queryFirstRow("SELECT * FROM admins WHERE email=%s", $email);
+        if ($row) {
+            $values['email'] = '';
+            array_push($errorList, "Email already in use");
+        }
+    }   
+    
+   
+    
+    if (strlen($username) < 5 || strlen($username) > 50) {
+          $values['username'] = '';
+        array_push($errorList, "Username must be between 5 and 50 characters");
+    }
+    else {
+         $row = DB::queryFirstRow("SELECT * FROM admins WHERE username=%s", $username);
+         if ($row) {
+            $values['username'] = '';
+            array_push($errorList, "username already Exists");
+        }
+    }
+
+    // password validation
+    if ($pass1 != $pass2) {
+        array_push($errorList, "Passwords don't match");
+    } else {
+        if (strlen($pass1) < 2 || strlen($pass1) > 100) {
+            array_push($errorList, "Password must be between 2 and 100 characters ");
+        }
+        if (!preg_match('/[A-Z]/', $pass1) || !preg_match('/[a-z]/', $pass1) || !preg_match('/[0-9' . preg_quote("!@#\$%^&*()_-+={}[],.<>;:'\"~`") . ']/', $pass1)) {
+            array_push($errorList, "Password must include at least one of each: "
+                    . "uppercase letter, lowercase letter, digit or special character");
+        }
+    }
+    
+  
+    
+    if ($errorList) {
+        //3. failed submission
+        $app->render('/admin/admin_register.html.twig', array('errorList' => $errorList, 'v' => $values));
+    }
+    else {
+        //4. Successful submission
+       
+      DB::insert('admins', $values);
+   $app->render('register_success.html.twig');
+   
+    }
+    
+   
     
 })->via('GET', 'POST');

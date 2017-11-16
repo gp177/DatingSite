@@ -5,6 +5,37 @@ if (false) {
     $log = new Logger('main');
 }
 
+// ======================================= remove user
+
+$app->get('/tickets/delete/:id', function($id) use ($app) {
+    
+     $users = DB::query('SELECT * FROM users WHERE id=%i', $_SESSION['user']['id']);
+     
+        if (!$users) {
+         $app->render('access_denied.html.twig');
+        return;
+    }
+   
+   $ticketrespond = DB::query('SELECT * FROM ticketmessages INNER JOIN tickets ON ticketmessages.ticketId = tickets.id INNER JOIN admins ON ticketmessages.adminId = admins.id  WHERE tickets.id=%i', $id);
+    
+    $app->render('/admin/users_remove.html.twig', array('list' => $ticketrespond));
+});
+
+$app->post('/admin/panel/delete/:id', function($id) use ($app) {
+   
+    $confirmed = $app->request()->post('confirmed');
+    if ($confirmed != 'true') {
+        $app->render('admin/not_found.html.twig');
+        return;
+    }
+    DB::delete('users', "id=%i", $id);
+    if (DB::affectedRows() == 0) {
+        $app->render('admin/not_found.html.twig');
+    } else {
+        $app->render('/admin/admin_users.html.twig');
+    }
+});
+
 // ========================================================== ticket response
 
 $app->get('/tickets/view/:id', function($id) use ($app) {

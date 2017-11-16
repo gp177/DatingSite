@@ -7,21 +7,6 @@ if (false) {
 }
 
 
-
-// ================================================= check if email is taken
-$app->get('/isaemailregistered/:email', function($email) use ($app) {
-
-    $row = DB::queryFirstRow("SELECT * FROM admins WHERE email=%s", $email);
-    echo!$row ? "" : '<span style="font-size: 16px; background-color: lightblue; color: red; font-weight: bold;">Email already Registered<?span>';
-});
-
-// ================================================= check if username is taken
-$app->get('/isausernameregistered/:username', function($username) use ($app) {
-
-    $row = DB::queryFirstRow("SELECT * FROM admins WHERE username=%s", $username);
-    echo!$row ? "" : '<span style="font-size: 16px; background-color: lightblue; color: red; font-weight: bold;">Username already Taken<?span>';
-});
-
 // ================================================= register
 $app->get('/admin/register', function() use ($app) {
     $app->render('/admin/admin_register.html.twig');

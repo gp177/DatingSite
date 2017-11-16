@@ -11,6 +11,32 @@
         
         <p>No Email Found</p>  
         {% endif %}
+        
+         <table  class="table-bordered table-hover">
+        <tr>
+            <th>#</th>
+            <th>Photo</th>
+            <th>username</th>
+            <th>email</th>
+            
+        </tr>
+    
+    {% for p in list %}
+        <tr>
+      <td>{{p.id}}</td>
+      <td><img src="{{p.profilePicPath}}" width="80" height="80"></td>
+            <td>{{p.username}}</td>
+            <td>{{p.email}}</td>
+          
+                    
+        </tr>
+        
+      
+            {% else %}
+            <tr><td colspan="6">There are no users</td></tr>
+                
+                {% endfor %}
+    </table>
             
 
     
@@ -23,11 +49,11 @@
         <div class="col-md-6">
           <div class="card text-white p-5 bg-primary" style="" >
             <div class="card-body">
-              <p>Enter the users email below you wish to invite to the Admin role</p>
+              <p>Enter the users email below you wish to invite to become an Admin </p>
               <form method="post">
                 <div class="form-group"> <label>Email</label>
                   <input type="email"  name="email" class="form-control" placeholder="Enter Email"> </div>
-                <button type="submit" class="btn btn-secondary">Request</button>
+                <button type="submit" class="btn btn-secondary">Invite</button>
               </form>
             </div>
           </div>
