@@ -103,3 +103,9 @@ Date and Name
 1. added dual communication to ticketing system, started on notifications
 2. need to fix single user message problem with ticket chatting
 3. discuss ideas for user notification viewing.
+
+
+11/16/2017 Giorgio Plescia,
+1. Fixed issue with generation function, admin regist request completed.
+2. complete statistics for admins, add final button in panel.
+3. needing assistance on notifications for users/admins
