@@ -125,3 +125,10 @@ Date and Name
 1. search page with bar and working query, user can send messages  chat but couldn't refresh the messageBox page
 2.finish chat, album
 3. ask teacher about messagebox refresh, talk to teammate about plan for presentation
+
+
+11/17/2017 Giorgio Plescia,
+1. worked on searching functionality, and fix admin panel issues.
+2. finish search and link with db query to homepage, create powerpoint presentation.
+3. require help on index page and styling issues.
+
