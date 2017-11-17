@@ -4,6 +4,13 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
+   <!-- <script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script> -->
 
 {% if error %}
     <p>Login invalid. Try again or <a href="/register">register</a>.</p>
@@ -14,12 +21,31 @@
     Password: <input type="password" name="pass"><br>
     <input type="submit" value="Login">
 </form> -->
-
+<div id="fb-root"></div>
+  <script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '128303637846388',
+        status     : true, 
+        cookie     : true,
+        xfbml      : true,
+        oauth      : true
+      });
+    };
+    (function(d){
+       var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
+       js = d.createElement('script'); js.id = id; js.async = true;
+       js.src = "//connect.facebook.net/en_US/all.js";
+       d.getElementsByTagName('head')[0].appendChild(js);
+     }(document));
+  </script>
 
 <html>
     <body>
     <div class="py-5">
     <div class="container">
+        <div id="fb-root"></div>
+        
       <div class="row">
         <div class="col-md-3"> </div>
         <div class="col-md-6">
@@ -31,7 +57,7 @@
                   <input type="text"  name="username" class="form-control" placeholder="Enter username"> </div>
                 <div class="form-group"> <label>Password</label>
                   <input type="password" name="pass" class="form-control" placeholder="Password"> </div>
-                <button type="submit" class="btn btn-secondary">Login</button>
+                  <button type="submit" class="btn btn-secondary">Login</button>  <div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>        
               </form>
               <br>
               <p>Forgot Password?<br> <a id="click" href="/password/request"><b><u>Click here</u></b></a></p>
