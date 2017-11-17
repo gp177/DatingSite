@@ -16,16 +16,23 @@ $app->get('/chats', function() use ($app) {
     if (!$chatList){
         echo'you don\'t havechats';
     }
-    
-
+ 
     //print_r($chatList);
     $app->render('chat.html.twig', array('chatList'=>$chatList));
 });
 
-$app->get('/chats(/:chatId)', function($chatId) use ($app){
+$app->get('/chats(/:chatId)', function($chatId) use ($app,$log){
 
 $chat=DB::query('SELECT * FROM chatMessages WHERE chatId=%s ', $chatId);
 //print_r($chat);
 $app->render('messageBox.html.twig',array('mes'=>$chat));
 
+});
+
+$app->post('/chats/:chatId', function($chatId) use ($app,$log){
+
+    
+   $message=$app->request()->post('message');
+   DB::insert('chatMessages' , array('authorId'=>$_SESSION['user']['id'],'chatId'=>$chatId,'messages'=>$message)); 
+   $app->render('messageBox.html.twig',array('mes'=>$chat));
 });

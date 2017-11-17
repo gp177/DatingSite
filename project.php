@@ -114,4 +114,7 @@ require_once 'register.php';
 
 require_once 'profile.php';
 
+require_once 'search.php';
+
+
 $app->run();
