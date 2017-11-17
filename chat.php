@@ -29,10 +29,14 @@ $app->render('messageBox.html.twig',array('mes'=>$chat));
 
 });
 
-$app->post('/chats/:chatId', function($chatId) use ($app,$log){
+//$app->get('/chats/:chatId/:message', function($chatId,$message) use ($app,$log){
+//
+//DB::insert('chatMessages' , array('authorId'=>$_SESSION['user']['id'],'chatId'=>$chatId,'messages'=>$message)); 
+//echo json_encode(DB::affectedRows() == 1);
+//});
 
-    
-   $message=$app->request()->post('message');
+$app->post('/ajax/addchatmsg/:chatId', function($chatId) use ($app,$log){
+   $message=$app->request()->getBody();
    DB::insert('chatMessages' , array('authorId'=>$_SESSION['user']['id'],'chatId'=>$chatId,'messages'=>$message)); 
-   $app->render('messageBox.html.twig',array('mes'=>$chat));
+   echo 'true';
 });

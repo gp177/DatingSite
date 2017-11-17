@@ -3,10 +3,29 @@
 {% block title %}Chats{% endblock %}
 {% block headextra %}
     <script>
-          function loadPage(cid) {
+        var currChatNo = 0;
+
+        function loadPage(cid) {
             $('#chatBox').load("/chats/" + cid);
-            window.history.pushState("", "Chats", "/chats/" + cid);  
+            currChatNo = cid;
+            // window.history.pushState("", "Chats", "/chats/" + cid);  
         }
+        setInterval(chatRefresh, 3000);
+        function chatRefresh() {
+            if (currChatNo > 0) {
+                loadPage(currChatNo);
+            }
+        }
+        function sendMessage() {
+            var msg = $("input[name=message]").val();
+            console.log("sendMessage: " + msg)
+            $.post("/ajax/addchatmsg/" + currChatNo, msg, function() {
+                console.log("msg posted to chat " + currChatNo );
+                loadPage(currChatNo);
+                $("input[name=message]").val("");
+            });
+        }
+
     </script>
 {% endblock %}
 
@@ -49,41 +68,37 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-4">
-                
-                
-                
-                 {% for chat in chatList  %}
-                <a href="javascript:loadPage({{chat.id}})"  class="chatperson">
-                    <span class="chatimg">
-                        <img src="{{chat.user2Pic}}" alt="" />
-                    </span>
-                    <div class="namechat">
-                        <div class="pname">{{chat.user2}}</div>
-                        <div class="lastmsg"></div>
-                         
-                    </div>
 
-                </a>
 
-                 {% endfor %}
-             
+
+                {% for chat in chatList  %}
+                    <a href="javascript:loadPage({{chat.id}})"  class="chatperson">
+                        <span class="chatimg">
+                            <img src="{{chat.user2Pic}}" alt="" />
+                        </span>
+                        <div class="namechat">
+                            <div class="pname">{{chat.user2}}</div>
+                            <div class="lastmsg"></div>
+
+                        </div>
+
+                    </a>
+
+                {% endfor %}
+
             </div>
             <div class="col-sm-8">
-              <form method="post" >
-                <div id="chatBox" class="chatbody">
-
-              
-                </div>
-
-                <div class="row">
-                    <div class="col-xs-9">
-                        <input type="text" name="message" placeholder="Enter message" class="form-control" />
+                    <div id="chatBox" class="chatbody">
                     </div>
-                    <div class="col-xs-3">
-                        <button type="submit" class="btn btn-primary btn-block" >Send</button>
+
+                    <div class="row">
+                        <div class="col-xs-9">
+                            <input type="text" name="message" placeholder="Enter message" class="form-control" />
+                        </div>
+                        <div class="col-xs-3">
+                            <button class="btn btn-primary btn-block" onclick="sendMessage()">Send</button>
+                        </div>
                     </div>
-                </div>
-              </form>
             </div>
         </div>
     </div>
