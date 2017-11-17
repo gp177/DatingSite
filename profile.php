@@ -21,7 +21,7 @@ $app->get('/profile', function() use ($app, $log) {
         } else {
   
             $app->render('profile.html.twig', array('pl' => $profileList));
-           
+           $productList = DB::query("SELECT * FROM users");
         }
     }
 });
