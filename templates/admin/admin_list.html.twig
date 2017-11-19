@@ -1,0 +1,53 @@
+{% extends "master.html.twig" %}
+
+{% block title %}Admins{% endblock %}
+
+{% block content %}
+    <div class="container">
+    <h2>Total Admins: {{adminCount}}</h2>
+    <br>
+    <form method="get">            
+        <input type="text" name="search" value="{{v.name}}">
+        <input type="submit" value="Search"><br><br>
+                     </form>
+    
+       
+    <table class="table-bordered table-hover">
+        <tr>
+            <th>#</th>
+            <th>username</th>
+            <th>email</th>
+             <th>Registration Date</th>
+             <th>Actions</th>
+        </tr>
+    
+    {% for p in list %}
+        <tr>
+      <td>{{p.id}}</td>
+    
+            <td> {{p.username}}</td>
+            <td> {{p.email}}</td>
+                  <td> {{p.registrationDate}}</td>
+                  <td>
+               
+              
+                <a href="/admin/panel/delete/{{p.id}}"> Email</a>
+                  </td>
+                    
+        </tr>
+        
+      
+            {% else %}
+            <tr><td colspan="6">There are no Admins</td></tr>
+                
+                {% endfor %}
+    </table>
+    
+    <br>
+                
+         <button onclick="window.location.href='/admin/panel';">Go Back</button> <br>
+ 
+        </div>
+    
+{% endblock %}
+

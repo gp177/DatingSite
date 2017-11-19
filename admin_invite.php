@@ -41,7 +41,7 @@ $app->map('/admin/panel/invite', function() use ($app, $log) {
         
         mail($toEmail, "Admin invitation for " . $_SERVER['SERVER_NAME'], $emailBody, $headers);
         
-        echo "Invitation Sent!";
+       $app->render('/admin/admin_panel.html.twig');
  
     }
     else { // failed request

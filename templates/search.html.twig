@@ -110,12 +110,39 @@
             color:#BC0213;
         }  
     </style>   
-
+    
+    
+   <div class="row">
+        <div class="col-md-3"> </div>
+        <div class="col-md-5">
+          <div class="card text-white p-5 bg-primary" style="" >
+            <div class="card-body">
+ 
+              <form method="post">
+               I'm looking for: <select name="gender">
+                   <option value="male">Man</option>
+                    <option value ="female">Woman</option>
+                </select><br>
+                
+                  Age: from <input type="number" name="ageFrom" placeholder="From"/> to <input type="number" name="ageTo" placeholder="To"/><br>
+                <input type="checkbox" name="withPhoto" value="photo" >With Photo<br>
+                <input type="submit" class="btn btn-secondary" value="Search">
+                      
+              </form>
+              <style> 
+                  #click {
+                      color:white;
+                  }
+              </style>
+            </div>
+          </div>
+        </div>
+      </div>
     
 
-                    <div class="container">
+       <!--             <div class="container">
             <form method="post">
-                I'm looking for:<select name="gender">
+                I'm looking for: <select name="gender">
                     <option value="male">Man</option>
                     <option value ="female">Woman</option>
                 </select><br>
@@ -124,7 +151,7 @@
                 <input type="submit" value="Search">
             </form>
 
-         </div>
+         </div> -->
 
             <section  class="team">
                 <div class="container">
