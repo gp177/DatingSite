@@ -3,7 +3,6 @@
 
 {% block title %}{% endblock %}
 
-
 {% block content %}
     {% if errorList %}
         <ul>
@@ -43,9 +42,10 @@
                     </table>
                     <hr>
                     {% if adminSession or  userSession.id!= pl.id %}
-                        <button type="button" name="edit" onclick="location.href = #;">Write a messege to {{pl.name}}</button>
+                        <button type="button" name="edit" onclick="location.href = '/chats/new/{{pl.id}}';">Write a messege to {{pl.name}}</button>
                     {% else %}
                         <button type="button" name="edit" onclick="location.href = '/editprofile';">Edit Profile</button>
+                        <button type="button" name="edit" onclick="location.href = '/photos';">My Photos</button>
                     {% endif %}
                 </div>
             </div>

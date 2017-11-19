@@ -8,7 +8,11 @@
         function loadPage(cid) {
             $('#chatBox').load("/chats/" + cid);
             currChatNo = cid;
-            // window.history.pushState("", "Chats", "/chats/" + cid);  
+
+        }
+        function loadHistory() {
+            $('#history').load("/chats/history/" + currChatNo);
+
         }
         setInterval(chatRefresh, 3000);
         function chatRefresh() {
@@ -19,8 +23,8 @@
         function sendMessage() {
             var msg = $("input[name=message]").val();
             console.log("sendMessage: " + msg)
-            $.post("/ajax/addchatmsg/" + currChatNo, msg, function() {
-                console.log("msg posted to chat " + currChatNo );
+            $.post("/ajax/addchatmsg/" + currChatNo, msg, function () {
+                console.log("msg posted to chat " + currChatNo);
                 loadPage(currChatNo);
                 $("input[name=message]").val("");
             });
@@ -30,6 +34,7 @@
 {% endblock %}
 
 {% block content %}
+
     <style>
         .chatperson{
             display: block;
@@ -64,6 +69,60 @@
             padding-left: 5px;
             color: #ccc;
         }
+        {#===========================chatBox#}
+        .date{
+            font-size:10px;
+            font-weight: bold;
+        }
+        .chatbox{
+            margin:10px 10px;
+
+            background-color:#ccc;
+            width:500px;
+            height:500px;
+            overflow: auto;
+        }
+        .bubbledLeft,.bubbledRight{
+            margin-top: 3px;
+            padding: 3px 5px 3px 5px;
+            max-width: 80%;
+            clear: both;
+        }
+
+        .bubbledLeft{
+            float: left;
+            margin-right: auto;
+
+            border: 1px solid grey;
+            border-radius: 5px 5px 5px 0px;	
+            -webkit-border-radius: 5px 5px 5px 0px;
+            -moz-border-radius: 5px 5px 5px 0px;
+            -o-border-radius: 5px 5px 5px 0px;
+            -ms-border-radius: 5px 5px 5px 0px;
+            background-color: #ffff99;
+        }
+
+        .bubbledRight{
+            float: right;
+            margin-left: auto;
+            text-align: right;
+
+            border: 1px solid grey;
+            border-radius: 5px 0px 5px 5px;
+            -webkit-border-radius: 5px 5px 0px 5px;
+            -moz-border-radius: 5px 5px 0px 5px;
+            -o-border-radius: 5px 5px 0px 5px;
+            -ms-border-radius: 5px 5px 0px 5px;
+            background-color: #99ccff;
+        }
+        .row{
+                margin-left: 10px;
+        }
+        .ml-5{
+            margin-left: 10rem !important;
+        }
+
+
     </style>
     <div class="container">
         <div class="row">
@@ -74,32 +133,57 @@
                 {% for chat in chatList  %}
                     <a href="javascript:loadPage({{chat.id}})"  class="chatperson">
                         <span class="chatimg">
-                            <img src="{{chat.user2Pic}}" alt="" />
+{% if userSession.id == chat.u1Id %}
+                        <img src="{{chat.user2Pic}}" alt="" />
                         </span>
                         <div class="namechat">
-                            <div class="pname">{{chat.user2}}</div>
-                            <div class="lastmsg"></div>
-
+                        <div class="pname">{{chat.user2}}</div>
                         </div>
-
+{% else %}  
+                        <img src="{{chat.user1Pic}}" alt="" />
+                        </span>
+                        <div class="namechat">
+                        <div class="pname">{{chat.user1}}</div>
+                        </div>
+{% endif %}
                     </a>
 
                 {% endfor %}
 
             </div>
             <div class="col-sm-8">
-                    <div id="chatBox" class="chatbody">
-                    </div>
+                <div id="chatBox" class="chatbox">
 
-                    <div class="row">
-                        <div class="col-xs-9">
-                            <input type="text" name="message" placeholder="Enter message" class="form-control" />
-                        </div>
-                        <div class="col-xs-3">
-                            <button class="btn btn-primary btn-block" onclick="sendMessage()">Send</button>
+                </div>
+                <div class="row">
+                    <div class="col-xs-9">
+                        <input type="text" name="message" placeholder="Enter message" class="form-control" />
+                    </div>
+                    <div class="col-xs-3">
+                        <button class="btn btn-primary btn-block " onclick="sendMessage()">Send</button>&nbsp;
+
+                    </div>
+                    <a class="ml-5" data-toggle="modal" data-target="#myModal" onclick="loadHistory()" href="#">History</a>
+                    <!-- Modal -->
+                    <div class="modal fade" id="myModal" role="dialog">
+                        <div class="modal-dialog">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Messaging History</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                                </div>
+                                <div id="history" class="modal-body chatbox">
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                </div>
             </div>
-        </div>
-    </div>
-{% endblock %}
+        {% endblock %}
