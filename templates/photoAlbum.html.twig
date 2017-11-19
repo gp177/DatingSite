@@ -1,0 +1,59 @@
+{% extends "master.html.twig" %}
+
+
+{% block title %}Ptotos{% endblock %}
+{% block headextra %} 
+
+
+{% endblock %}
+
+{% block content %}
+    <style>
+    </style>
+    <form method="post" enctype="multipart/form-data" name="formUploadFile">      
+        <label>Select files to upload:</label>
+        <input type="file" name="files[]" multiple="multiple" />
+        <input type="submit" value="Upload File" name="btnSubmit"/>
+    </form>
+
+
+    <div class="container">
+          <h2>Image Gallery</h2>
+            <div class="row">
+        {% for pic in picList%}
+
+
+
+          
+
+          
+                <div class="col-md-4">
+                    <div  width="300" heght="300" class="thumbnail">
+                        <a data-toggle="modal" data-target="#myModal-{{loop.index}}" href="#"> <img class="img-fluid" src="{{pic.picPath}}"/></a>
+                    </div>
+                </div>
+          
+
+            <div class="modal fade"    id="myModal-{{loop.index}}" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content" style="width: 800px; margin-right:0; ">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Photo-{{loop.index}}</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                        </div>
+                        <div  class="modal-body">
+                            <img  class="img-fluid" src="{{pic.picPath}}"/>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+          </div>
+        {% endfor %}
+    </div>
+        </div>
+{% endblock %}

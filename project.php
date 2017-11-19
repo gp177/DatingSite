@@ -106,6 +106,8 @@ require_once 'admin_login.php';
 
 require_once 'search.php';
 
+require_once 'photoAlbum.php';
+
 require_once 'user_ticket.php';
 
 require_once 'chat.php';
