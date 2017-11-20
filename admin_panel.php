@@ -8,6 +8,42 @@ if (false) {
 
 
 
+// ================================================== admin list
+
+$app->get('/admin/panel/admins', function() use ($app) {
+    
+        
+    $adminvalid = DB::query('SELECT * FROM admins WHERE id=%i', $_SESSION['user']['id']);
+    
+    if (!$adminvalid) {
+         $app->render('access_denied.html.twig');
+        return;
+    }
+
+        
+  
+    $adminCount = DB::query('SELECT id FROM admins');
+    
+    $productList = DB::query("SELECT * FROM admins");
+    $app->render('/admin/admin_list.html.twig', array('list' => $productList, 'userCount' => count($adminCount)));
+});
+
+
+
+// ========================================================== ticket response
+$app->get('/admin/panel/statistics', function() use ($app) {
+    
+    $adminvalid = DB::query('SELECT * FROM admins WHERE id=%i', $_SESSION['user']['id']);
+    
+    if (!$adminvalid) {
+         $app->render('access_denied.html.twig');
+        return;
+    }
+    
+     $app->render('/admin/admin_statistics.html.twig');
+});
+
+
 
 // ========================================================== ticket response
 

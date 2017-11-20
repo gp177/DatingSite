@@ -118,12 +118,19 @@
                 <div class="container py-5">
                     <div class="row">
                         <div class="col-md-12 text-white">
-                            <h1 class="display-3 mb-4">Datenator</h1>
-                            <p class="lead mb-5">Nulla faucibus lacus nec metus pretium, non porttitor neque vulputate. Duis porttitor dignissim ligula, id feugiat dolor consectetur in. 
-                                Duis ut nibh sit amet felis fringilla convallis. Ut ultricies ipsum in neque laoreet, nec lacinia arcu vestibulum. Praesent consectetur arcu nibh, non aliquet 
-                                metus malesuada a. </p>
+                            <h1  class="display-3 mb-4">Datenator</h1>
+                            <p class="lead mb-5">Finding partners with a perfect match can be quite challenging the traditional way, Not with Datenator. With our Advanced Data System, You are matched with the most compatible partners towards your profile.
+                            Leading to a more reliable and passionate relationship, less time looking, more time dating.</p>
                            
+                              {% if not userSession %}
+                            
                             <a href="/register" class="btn btn-lg btn-primary ">JOIN NOW</a>
+                            
+                           
+                            
+                            {% else %}
+                              <a href="/search" class="btn btn-lg btn-primary ">Search for Matches</a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

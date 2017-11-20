@@ -99,7 +99,7 @@ require_once 'admin_panel.php';
     
 require_once 'admin_login.php';
 
-//require_once 'admin_register.php';
+
 
 
 // ============================================================= USERS TABLE ================================================================

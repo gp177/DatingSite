@@ -119,6 +119,7 @@
             color:#BC0213;
         }  
     </style>   
+<<<<<<< HEAD
 
 
 
@@ -173,6 +174,77 @@
                                     <h2>{{u.age}} </h2>
                                     <p>{{u.occupation}}</p>
 
+=======
+    
+    
+   <div class="row">
+        <div class="col-md-3"> </div>
+        <div class="col-md-5">
+          <div class="card text-white p-5 bg-primary" style="" >
+            <div class="card-body">
+ 
+              <form method="post">
+               I'm looking for: <select name="gender">
+                   <option value="male">Man</option>
+                    <option value ="female">Woman</option>
+                </select><br>
+                
+                  Age: from <input type="number" name="ageFrom" placeholder="From"/> to <input type="number" name="ageTo" placeholder="To"/><br>
+                <input type="checkbox" name="withPhoto" value="photo" >With Photo<br>
+                <input type="submit" class="btn btn-secondary" value="Search">
+                      
+              </form>
+              <style> 
+                  #click {
+                      color:white;
+                  }
+              </style>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+       <!--             <div class="container">
+            <form method="post">
+                I'm looking for: <select name="gender">
+                    <option value="male">Man</option>
+                    <option value ="female">Woman</option>
+                </select><br>
+                Age: from <input type="number" name="ageFrom"/> to <input type="number" name="ageTo"/><br>
+                <input type="checkbox" name="withPhoto" value="photo" >With Photo<br>
+                <input type="submit" value="Search">
+            </form>
+
+         </div> -->
+
+            <section  class="team">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-1">
+                            <div class="col-lg-12">
+                                <h6 class="description">NEW PROFILES</h6>
+
+                            
+
+                                <div class="row pt-md">
+                                    {% for u in list %}
+                                        <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 profile ">
+                                            <div class="img-box ">
+                                                <img src="{{u.profilePicPath}}" style="height:200px; width: 200px; "  >
+                                                <ul class="text-center">
+                                                    <a href="/profile/{{u.id}}"><li><i class="fa fa-users"></i></li></a>
+
+
+                                                </ul>
+                                            </div>
+                                            <h1>{{u.name}}</h1>
+                                            <h2>{{u.age}} </h2>
+                                            <p>{{u.occupation}}</p>
+
+                                        </div>
+                                    {% endfor %}
+>>>>>>> 96420eff93df1a141e3b970ff9fe12082b162e78
                                 </div>
                             {% endfor %}
                         </div>
