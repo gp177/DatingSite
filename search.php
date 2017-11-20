@@ -37,3 +37,22 @@ $app->post('/search', function() use ($app) {
     $app->render('/search_results.html.twig', array('list' => $newList, 'age' => $age));
 });
 
+
+$app->get('/newsearch(/:page)', function($page=1) use ($app) {
+    $perPage = 4;
+    $totalCount = DB::queryFirstField ("SELECT COUNT(*) AS count FROM users");
+    $maxPages = ($totalCount + $perPage - 1) / $perPage;
+    if ($page > $maxPages) {
+        http_response_code(404);
+        $app->render('not_found.html.twig');
+        return;
+    }
+    $skip = ($page - 1) * $perPage;
+    $userList = DB::query("SELECT * FROM users ORDER BY id LIMIT %d,%d", $skip, $perPage);
+    $app->render('newproducts.html.twig', array(
+        "productList" => $userList,
+        "maxPages" => $maxPages,
+        "currentPage" => $page
+        ));
+ 
+});

@@ -112,8 +112,6 @@
     </style>   
 
     <html>
-
-
         <body>
 
             <div class="py-5 text-center opaque-overlay" style="background-image: url('../../images/indexpic.jpg');">
@@ -130,18 +128,13 @@
                     </div>
                 </div>
             </div>
-
-
             <section  class="team">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-10 col-md-offset-1">
                             <div class="col-lg-12">
                                 <h6 class="description">NEW PROFILES</h6>
-
-                            
-
-                                <div class="row pt-md">
+                               <div class="row pt-md">
                                     
                                     {% for u in list %}
                                         <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 profile ">
@@ -149,14 +142,11 @@
                                                 <img src="{{u.profilePicPath}}" style="height:200px; width: 200px; "  >
                                                 <ul class="text-center">
                                                     <a href="/profile/{{u.id}}"><li><i class="fa fa-users"></i></li></a>
-
-
                                                 </ul>
                                             </div>
                                             <h1>{{u.name}}</h1>
                                             <h2>{{u.age}} </h2>
                                             <p>{{u.occupation}}</p>
-
                                         </div>
                                     {% endfor %}
                                 </div>

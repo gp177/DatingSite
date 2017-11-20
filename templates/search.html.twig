@@ -1,6 +1,15 @@
 {% extends "master.html.twig" %}
 {% block headextra %}
-  
+    <script>
+        var currentPage = {{currentPage}};
+        function loadPage(page) {
+            $('#btPage' + currentPage).removeClass("currentPageButton");
+            currentPage = page;
+            $('#btPage' + currentPage).addClass("currentPageButton");
+            $('#itemsView').load("/ajax/newproducts/" + page);
+            window.history.pushState("", "Product list", "/newproducts/" + page);  
+        }
+    </script>
 {% endblock %}
 
 {% block title %}Main{% endblock %}
@@ -25,7 +34,7 @@
         }
         .profile{
             margin-top: 25px ;
-         
+
         }
         .profile h1{
             font-weight: normal;
@@ -111,75 +120,89 @@
         }  
     </style>   
 
-    
-
-                    <div class="container">
-            <form method="post">
-                I'm looking for:<select name="gender">
-                    <option value="male">Man</option>
-                    <option value ="female">Woman</option>
-                </select><br>
-                Age: from <input type="number" name="ageFrom"/> to <input type="number" name="ageTo"/><br>
-                <input type="checkbox" name="withPhoto" value="photo" >With Photo<br>
-                <input type="submit" value="Search">
-            </form>
-
-         </div>
-
-            <section  class="team">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-10 col-md-offset-1">
-                            <div class="col-lg-12">
-                                <h6 class="description">NEW PROFILES</h6>
-
-                            
-
-                                <div class="row pt-md">
-                                    {% for u in list %}
-                                        <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 profile ">
-                                            <div class="img-box ">
-                                                <img src="{{u.profilePicPath}}" style="height:200px; width: 200px; "  >
-                                                <ul class="text-center">
-                                                    <a href="/profile/{{u.id}}"><li><i class="fa fa-users"></i></li></a>
 
 
-                                                </ul>
-                                            </div>
-                                            <h1>{{u.name}}</h1>
-                                            <h2>{{u.age}} </h2>
-                                            <p>{{u.occupation}}</p>
+    <div class="container card text-white p-4 bg-primary" style="margin-top:20px; width:600px;">
+        <form method="post"> 
+            <table>
+                <tr><th style="text-align:right;">I'm looking for</th>
+                    <td style="text-align:left;"><select name="gender">
+                            <option value="male">Man</option>
+                            <option value ="female">Woman</option>
+                        </select></td>
+                </tr>
+                <tr>
+                    <th style="text-align:right;">Age: from </th> 
+                    <td><input  class="col-xs-1" type="number" name="ageFrom"  maxlength="4" size="4"/> <b>to</b> <input type="number" name="ageTo"/></td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <th style="text-align:left;"><input type="checkbox" name="withPhoto" value="photo" >With Photo</th>
 
-                                        </div>
-                                    {% endfor %}
+                    </td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <th><input type="submit" value="Search"></th></tr>
+            </table>
+        </form>
+
+    </div>
+
+    <section  class="team">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <div class="col-lg-12">
+                        <h6 class="description">NEW PROFILES</h6>
+
+
+
+                        <div class="row pt-md">
+                            {% for u in list %}
+                                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 profile ">
+                                    <div class="img-box ">
+                                        <img src="{{u.profilePicPath}}" style="height:200px; width: 200px; "  >
+                                        <ul class="text-center">
+                                            <a href="/profile/{{u.id}}"><li><i class="fa fa-users"></i></li></a>
+
+
+                                        </ul>
+                                    </div>
+                                    <h1>{{u.name}}</h1>
+                                    <h2>{{u.age}} </h2>
+                                    <p>{{u.occupation}}</p>
+
                                 </div>
-                            </div>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
-            </section>
-            <footer>
-                <div class="container">
-                    <nav aria-label="...">
-                        <ul class="pagination">
-                            <li class="page-item disabled">
-                                <span class="page-link">Previous</span>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item active">
-                                <span class="page-link">
-                                    2
-                                    <span class="sr-only">(current)</span>
-                                </span>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">Next</a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-            </footer>  
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="container">
+            <nav aria-label="...">
+                <ul class="pagination">
+                    <li class="page-item disabled">
+                        <span class="page-link">Previous</span>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item active">
+                        <span class="page-link">
+                            2
+                            <span class="sr-only">(current)</span>
+                        </span>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">Next</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </footer>  
 
 
 

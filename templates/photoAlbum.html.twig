@@ -8,26 +8,21 @@
 {% endblock %}
 
 {% block content %}
-    <style>
-    </style>
-    <form method="post" enctype="multipart/form-data" name="formUploadFile">      
+  
+     <div class="container card text-white p-4 bg-primary" style="margin-top:20px; margin-bottom: 20px; width:600px;">
+         <form method="post" enctype="multipart/form-data" name="formUploadFile">      
         <label>Select files to upload:</label>
         <input type="file" name="files[]" multiple="multiple" />
         <input type="submit" value="Upload File" name="btnSubmit"/>
     </form>
-
-
+    </div>
     <div class="container">
-          <h2>Image Gallery</h2>
+                  <h2>Image Gallery</h2>
             <div class="row">
+        
         {% for pic in picList%}
-
-
-
-          
-
-          
-                <div class="col-md-4">
+       
+                <div  width="300" heght="300" class="col-md-4" style=" margin-bottom: 10px;">
                     <div  width="300" heght="300" class="thumbnail">
                         <a data-toggle="modal" data-target="#myModal-{{loop.index}}" href="#"> <img class="img-fluid" src="{{pic.picPath}}"/></a>
                     </div>

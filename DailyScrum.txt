@@ -132,3 +132,7 @@ Date and Name
 2. finish search and link with db query to homepage, create powerpoint presentation.
 3. require help on index page and styling issues.
 
+11/20/2017 Oleksii Redko
+1.create albums adding multiple photos, bug fix in chats
+2.continue working, finish with functionality redesign
+3.no questions so far
